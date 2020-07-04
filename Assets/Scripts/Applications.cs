@@ -29,13 +29,13 @@ public class Applications : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     IEnumerator OpenAnimation() {
         float curveTime = 0.0f;
         float curveAmount = curve.Evaluate(curveTime);
-
+        
         while(curveAmount<1.0f) {
             curveTime += Time.deltaTime * speedMultifier;
             curveAmount = curve.Evaluate(curveTime);
