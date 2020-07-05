@@ -58,28 +58,26 @@ public class Window : MonoBehaviour, WindowBase
     private float speedMultifier;
     private float targetScale;
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         position = Vector3.zero;
         eulerAngles = Vector3.zero;
         scale = new Vector3(1.0f, 1.0f, 1.0f);
-        distance = 3000.0f;
+        distance = 10.0f;
         visibility = false;
         speedMultifier = 2.0f;
         targetScale = 1.0f;
-        Invoke("Open", 1.0f);
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-
+        position = Camera.main.transform.forward * distance;
+        //eulerAngles += new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0);
     }
 
     public void Open() {
         visibility = true;
-        position = Camera.main.transform.forward * distance;
-        eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0);
         StartCoroutine(OpenAnimation()); 
     }
 
@@ -111,7 +109,6 @@ public class Window : MonoBehaviour, WindowBase
             
         }
 
-        gameObject.SetActive(false);
-        
+        visibility = false;
     }
 }

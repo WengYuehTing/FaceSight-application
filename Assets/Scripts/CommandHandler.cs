@@ -62,9 +62,9 @@ public class CommandHandler : MonoBehaviour
         }
         switch(cmd){
             case "Select":
-                InteraciveButton button = Camera.main.gameObject.GetComponent<HeadSetTracking>().targetButton;
-                if(button != null) {
-                    button.Activate();
+                Icon icon = Camera.main.gameObject.GetComponent<HeadSetTracking>().hoveredIcon;
+                if(icon != null) {
+                    icon.Activate();
                 }
                 break;
 
@@ -82,6 +82,7 @@ public class CommandHandler : MonoBehaviour
                     } 
                 }
                 Applications home = GetApplications(ApplicationsType.Home);
+                
                 interactive_application = home;
                 home.Open();         
                 break;
