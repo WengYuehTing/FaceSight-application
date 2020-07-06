@@ -7,21 +7,25 @@ public class HomeIcon : Icon
 {
     public Material normal;
     public Material hover;
-    public Window target;
     public float highlightedRatio;
     private Vector3 highlightedScale;
     private Vector3 originalScale;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        base.Start();
+    protected override void Awake() {
+        base.Awake();
+        scale = new Vector3(0.1812623f, 0.1510519f, 1.0f);
         highlightedScale = scale * highlightedRatio;
         originalScale = scale;
     }
 
+    // Start is called before the first frame update
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         base.Update();
     }
@@ -29,7 +33,6 @@ public class HomeIcon : Icon
     
     public override void Activate() {
         parent.Close();
-        target.Open();
     }
 
     public override void OnHovered() {

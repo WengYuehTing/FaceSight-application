@@ -5,16 +5,17 @@ using UnityEngine;
 public class HomeWindow : Window
 {
     // Start is called before the first frame update
+
+    // Keep initializing code on Awake insteaf of Start. 
     protected override void Awake() {
         base.Awake();
-        targetScale = 6.0f;
+        targetScale = new Vector3(6.0f, 7.0f, 1.0f);
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
         visibility = true;
     }
     protected override void Start()
     {
-        base.Start();
-        
+        base.Start(); 
     }
 
     // Update is called once per frame
@@ -22,12 +23,5 @@ public class HomeWindow : Window
     {
         base.Update();
     }
-
-    /* public override void Open() {
-        StartCoroutine(OpenAnimation()); 
-        position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition();
-        eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
-
-    } */
 
 }

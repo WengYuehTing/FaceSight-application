@@ -55,10 +55,11 @@ public class Window : MonoBehaviour, WindowBase
     
     public float distance { get; set; }
     public Vector3 eulerAngleOffsets { get; set; }
-    public AnimationCurve curve;
+    
     protected float speedMultifier;
-    protected float targetScale;
-    // Start is called before the first frame update
+    protected Vector3 targetScale;
+    public AnimationCurve curve;
+
 
     protected virtual void Awake() {
         position = Vector3.zero;
@@ -68,22 +69,15 @@ public class Window : MonoBehaviour, WindowBase
         distance = 20.0f;
         visibility = false;
         speedMultifier = 2.0f;
-        targetScale = 1.0f;
+        targetScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
-    protected virtual void Start()
-    {
-        
-    }
+    protected virtual void Start() {}
 
     // Update is called once per frame
     protected virtual void Update() {}
 
-    public virtual void Open() {
-        print("Open");
+    public void Open() {
         StartCoroutine(OpenAnimation()); 
-        position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition();
-        eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
-        
     }
 
     public void Close() {
@@ -95,12 +89,14 @@ public class Window : MonoBehaviour, WindowBase
         float curveAmount = curve.Evaluate(curveTime);
         visibility = true;
         scale = new Vector3(1,1,1);
+        position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition();
+        eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
         
         while(curveAmount<1.0f) {
             
             curveTime += Time.deltaTime * speedMultifier;
             curveAmount = curve.Evaluate(curveTime);
-            scale = new Vector3(targetScale*curveAmount, targetScale*curveAmount, 1);
+            scale = new Vector3(targetScale.x*curveAmount, targetScale.y*curveAmount, targetScale.z);
             yield return null;
         }
 
@@ -113,11 +109,11 @@ public class Window : MonoBehaviour, WindowBase
         while(curveAmount>0.0f) {
             curveTime -= Time.deltaTime * speedMultifier;
             curveAmount = curve.Evaluate(curveTime);
-            scale = new Vector3(targetScale*curveAmount, targetScale*curveAmount, 1);
+            scale = new Vector3(targetScale.x*curveAmount, targetScale.y*curveAmount, targetScale.z);
             yield return null;
             
         }
-        position = Vector3.zero;
-        eulerAngles = Vector3.zero;
+        
+        Destroy(this.gameObject);
     }
 }

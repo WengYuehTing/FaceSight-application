@@ -15,9 +15,14 @@ public class KeyboardBinder : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.H)) {
-            Vector3 position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition();
-            HomeWindow window = GameObject.Instantiate(utility.supportedApps[0]) as HomeWindow;
-            window.Open();
+            if(GameObject.FindObjectOfType<HomeWindow>() != null) {
+                HomeWindow window = GameObject.FindObjectOfType<HomeWindow>();
+                window.Close();
+            } else {
+                HomeWindow window = GameObject.Instantiate(utility.supportedApps[0]) as HomeWindow;
+                window.Open();
+            }
+            
         }
     }
 }
