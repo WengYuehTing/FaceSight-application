@@ -5,16 +5,19 @@ using UnityEngine.UI;
 
 public class HomeIcon : Icon
 {
+    [Header("Interaction")]
     public Material normal;
     public Material hover;
-    public float highlightedRatio;
+    [Tooltip("The xy ratio to enlarge when hovering")]
+    public float HoveredRatio;
+
     private Vector3 highlightedScale;
     private Vector3 originalScale;
 
     protected override void Awake() {
         base.Awake();
         scale = new Vector3(0.1812623f, 0.1510519f, 1.0f);
-        highlightedScale = scale * highlightedRatio;
+        highlightedScale = scale * HoveredRatio;
         originalScale = scale;
     }
 

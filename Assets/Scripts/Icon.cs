@@ -8,7 +8,9 @@ public class Icon : MonoBehaviour
     // Start is called before the first frame update
     
     protected Vector3 scale { get; set; }
-    [ReadOnly] public Window parent;
+
+    [Header("Icon Base")]
+    public Window parent;
     [ReadOnly] public bool isHovering;
     
     protected virtual void Awake() {

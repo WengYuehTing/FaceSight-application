@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class HeadSetTracking : MonoBehaviour {
 
+	[SerializeField] private bool debug = true;
+
 	private Camera cam;
 	private Vector3 center;
 	private Image pointer;
@@ -15,9 +17,6 @@ public class HeadSetTracking : MonoBehaviour {
 	private GameObject windowSlot; 
 	public Window hoveredWindow;
 	public Icon hoveredIcon;
-	public InteraciveButton targetButton;
-
-	[SerializeField] private bool debug = true;
 
 	void Start () {
 		
@@ -26,7 +25,6 @@ public class HeadSetTracking : MonoBehaviour {
 		pointer = GameObject.Find("PointerImage").GetComponent<Image>();
 		windowSlot = GameObject.Find("WindowSlot");
 		raycastDistance = 4000.0f;
-		slotDistance = 20.0f;
 	}
 
 	void Update () {
