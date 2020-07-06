@@ -54,50 +54,59 @@ public class Window : MonoBehaviour, WindowBase
     }
     
     public float distance { get; set; }
+    public Vector3 eulerAngleOffsets { get; set; }
     public AnimationCurve curve;
-    private float speedMultifier;
-    private float targetScale;
+    protected float speedMultifier;
+    protected float targetScale;
     // Start is called before the first frame update
-    protected void Start()
-    {
+
+    protected virtual void Awake() {
         position = Vector3.zero;
         eulerAngles = Vector3.zero;
+        eulerAngleOffsets = Vector3.zero;
         scale = new Vector3(1.0f, 1.0f, 1.0f);
-        distance = 10.0f;
+        distance = 20.0f;
         visibility = false;
         speedMultifier = 2.0f;
         targetScale = 1.0f;
     }
-
-    // Update is called once per frame
-    protected void Update()
+    protected virtual void Start()
     {
-        position = Camera.main.transform.forward * distance;
-        //eulerAngles += new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0);
+        
     }
 
-    public void Open() {
-        visibility = true;
+    // Update is called once per frame
+    protected virtual void Update() {}
+
+    public virtual void Open() {
+        print("Open");
         StartCoroutine(OpenAnimation()); 
+        position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition();
+        eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
+        
     }
 
     public void Close() {
         StartCoroutine(CloseAnimation()); 
     }
 
-    private IEnumerator OpenAnimation() {
+    IEnumerator OpenAnimation() {
         float curveTime = 0.0f;
         float curveAmount = curve.Evaluate(curveTime);
+        visibility = true;
+        scale = new Vector3(1,1,1);
         
         while(curveAmount<1.0f) {
+            
             curveTime += Time.deltaTime * speedMultifier;
             curveAmount = curve.Evaluate(curveTime);
             scale = new Vector3(targetScale*curveAmount, targetScale*curveAmount, 1);
             yield return null;
         }
+
     }
 
-    private IEnumerator CloseAnimation() {
+    IEnumerator CloseAnimation() {
         float curveTime = 1.0f;
         float curveAmount = curve.Evaluate(curveTime);
 
@@ -108,7 +117,7 @@ public class Window : MonoBehaviour, WindowBase
             yield return null;
             
         }
-
-        visibility = false;
+        position = Vector3.zero;
+        eulerAngles = Vector3.zero;
     }
 }

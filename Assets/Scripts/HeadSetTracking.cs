@@ -10,19 +10,23 @@ public class HeadSetTracking : MonoBehaviour {
 	private Vector3 center;
 	private Image pointer;
 	private float raycastDistance;
-	[SerializeField] private bool debug = true;
 
-	
+	[SerializeField] private float slotDistance;
+	private GameObject windowSlot; 
 	public Window hoveredWindow;
 	public Icon hoveredIcon;
 	public InteraciveButton targetButton;
+
+	[SerializeField] private bool debug = true;
 
 	void Start () {
 		
 		//Input.gyro.enabled = true;
 		cam = Camera.main;
 		pointer = GameObject.Find("PointerImage").GetComponent<Image>();
+		windowSlot = GameObject.Find("WindowSlot");
 		raycastDistance = 4000.0f;
+		slotDistance = 20.0f;
 	}
 
 	void Update () {
@@ -30,6 +34,8 @@ public class HeadSetTracking : MonoBehaviour {
 		if(!debug) {
 			this.gameObject.transform.rotation = Quaternion.AngleAxis (90.0f, Vector3.right) * Input.gyro.attitude * Quaternion.AngleAxis (180.0f, Vector3.forward);
 		}
+
+		windowSlot.transform.position = transform.forward * slotDistance;
 
 		center = new Vector2(cam.pixelWidth/2, cam.pixelHeight/2);
 
@@ -75,5 +81,7 @@ public class HeadSetTracking : MonoBehaviour {
 		
 	}
 
-
+	public Vector3 GetSlotPosition() {
+		return windowSlot.transform.position;
+	}
 }
