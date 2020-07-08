@@ -22,7 +22,6 @@ public class KeyboardBinder : MonoBehaviour
                 HomeWindow window = GameObject.Instantiate(utility.supportedApps[0]) as HomeWindow;
                 window.Open();
             }
-            
         }
     }
 }

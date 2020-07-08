@@ -66,7 +66,7 @@ public class Window : MonoBehaviour, WindowBase
         eulerAngles = Vector3.zero;
         eulerAngleOffsets = Vector3.zero;
         scale = new Vector3(1.0f, 1.0f, 1.0f);
-        distance = 20.0f;
+        distance = 10.0f;
         visibility = false;
         speedMultifier = 2.0f;
         targetScale = new Vector3(1.0f, 1.0f, 1.0f);
