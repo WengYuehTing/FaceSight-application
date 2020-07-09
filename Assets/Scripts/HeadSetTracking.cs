@@ -43,23 +43,26 @@ public class HeadSetTracking : MonoBehaviour {
 		{	
 			GameObject target = hit.collider.transform.parent.gameObject;
 			if(target.GetComponent<Icon>()) {
+				if(hoveredIcon != null) {
+					hoveredIcon.Leave();
+					hoveredIcon = null;
+				}
 				hoveredIcon = target.GetComponent<Icon>(); 
 				hoveredWindow = hoveredIcon.parent;
 				pointer.color = new Color(0f,1f,0f);
-				hoveredIcon.OnHovered();
+				hoveredIcon.Hover();
 			} else if(target.GetComponent<Window>()) {
 				if(hoveredIcon != null) {
-					hoveredIcon.OnLeaved();
+					hoveredIcon.Leave();
 					hoveredIcon = null;
 				}
 				hoveredWindow = target.GetComponent<Window>(); 
-				pointer.color = new Color(0f,1f,0f);
 			} 
 		}
 		else
 		{
 			if(hoveredIcon != null) 
-				hoveredIcon.OnLeaved();
+				hoveredIcon.Leave();
 			hoveredIcon = null;
 			hoveredWindow = null;
 			pointer.color = new Color(1f, 0f, 0f);

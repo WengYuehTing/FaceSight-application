@@ -8,7 +8,6 @@ interface WindowBase {
     Vector3 eulerAngles { get; set; }
     Vector3 scale { get; set; }
     bool visibility { get; set; }
-    float distance {get; set;}
     void Open();
     void Close();
 }
@@ -53,7 +52,7 @@ public class Window : MonoBehaviour, WindowBase
         }
     }
     
-    public float distance { get; set; }
+    public Vector3 positionOffsets {get; set; }
     public Vector3 eulerAngleOffsets { get; set; }
     
     protected float speedMultifier;
@@ -64,9 +63,9 @@ public class Window : MonoBehaviour, WindowBase
     protected virtual void Awake() {
         position = Vector3.zero;
         eulerAngles = Vector3.zero;
+        positionOffsets = Vector3.zero;
         eulerAngleOffsets = Vector3.zero;
-        scale = new Vector3(1.0f, 1.0f, 1.0f);
-        distance = 10.0f;
+        scale = new Vector3(0.1f, 0.1f, 0.1f);
         visibility = false;
         speedMultifier = 2.0f;
         targetScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -87,13 +86,12 @@ public class Window : MonoBehaviour, WindowBase
     IEnumerator OpenAnimation() {
         float curveTime = 0.0f;
         float curveAmount = curve.Evaluate(curveTime);
+        
         visibility = true;
-        scale = new Vector3(1,1,1);
-        position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition();
+        position = Camera.main.transform.GetComponent<HeadSetTracking>().GetSlotPosition() + positionOffsets;
         eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
         
         while(curveAmount<1.0f) {
-            
             curveTime += Time.deltaTime * speedMultifier;
             curveAmount = curve.Evaluate(curveTime);
             scale = new Vector3(targetScale.x*curveAmount, targetScale.y*curveAmount, targetScale.z);

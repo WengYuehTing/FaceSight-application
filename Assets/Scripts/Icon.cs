@@ -11,13 +11,18 @@ public class Icon : MonoBehaviour
 
     [Header("Icon Base")]
     public Window parent;
-    [ReadOnly] public bool isHovering;
+    [SerializeField] protected string name;
+    [SerializeField] protected bool isActive;
+    [ReadOnly, SerializeField] protected bool isHovering;
     
     protected virtual void Awake() {
         parent = transform.root.GetComponent<Window>();
         scale = Vector3.one;
         isHovering = false;
+        isActive = true;
+        name = gameObject.name;
     }
+
     protected virtual void Start()
     {
         
@@ -35,11 +40,21 @@ public class Icon : MonoBehaviour
 
     }
 
-    public virtual void OnHovered() {
+    public void Hover() {
+        if(isActive)
+            OnHovered();
+    }
+
+    public void Leave() {
+        if(isActive)
+            OnLeaved();
+    }
+
+    protected virtual void OnHovered() {
         isHovering = true;
     }
 
-    public virtual void OnLeaved() {
+    protected virtual void OnLeaved() {
         isHovering = false;
     }
 

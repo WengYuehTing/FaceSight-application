@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - UI
+  - Header
+  - Body
+  - Footer
   layers:
   - Default
   - TransparentFX

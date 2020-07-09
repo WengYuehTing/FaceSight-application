@@ -38,7 +38,7 @@ public class HomeIcon : Icon
         parent.Close();
     }
 
-    public override void OnHovered() {
+    protected override void OnHovered() {
         base.OnHovered();
         scale = highlightedScale;
         var materials = transform.GetChild(0).GetComponent<Renderer>().materials;
@@ -46,7 +46,7 @@ public class HomeIcon : Icon
         transform.GetChild(0).GetComponent<Renderer>().materials = materials;
     }
 
-    public override void OnLeaved() {
+    protected override void OnLeaved() {
         base.OnLeaved();
         scale = originalScale;
         var materials = transform.GetChild(0).GetComponent<Renderer>().materials;
