@@ -19,8 +19,11 @@ public class AndroidClient : MonoBehaviour
     private StreamReader reader;
     private Thread recvThread; 
 
+    private ApplicationManager manager;
+
     private void Start()
     {
+        manager = GameObject.FindObjectOfType<ApplicationManager>();
         setupSocket();
     }
 
@@ -80,8 +83,9 @@ public class AndroidClient : MonoBehaviour
         while(isConnected) {
             string recv = "";
             try {
-                recv = reader.ReadLine(); 
+                recv = reader.ReadLine();
                 print(recv);
+                manager.Push(recv.Substring(0, recv.Length-1));
             } catch(Exception e) {
                 print(e.Message);
             }

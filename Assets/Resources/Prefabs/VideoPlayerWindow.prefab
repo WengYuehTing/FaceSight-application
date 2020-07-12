@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870841534876713218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0.02, z: -0.53}
+  m_LocalPosition: {x: -0.39, y: 0.02, z: -0.53}
   m_LocalScale: {x: 0.06, y: 1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 870841535709250848}
@@ -2579,7 +2579,7 @@ Transform:
   m_GameObject: {fileID: 870841536435617777}
   m_LocalRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -0.445, y: 0.02, z: -0.53}
-  m_LocalScale: {x: 0.01, y: 1, z: 0.093095}
+  m_LocalScale: {x: 0.009315, y: 1, z: 0.093095}
   m_Children: []
   m_Father: {fileID: 870841535709250848}
   m_RootOrder: 0
@@ -2691,6 +2691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4c9ea971f52482e87df311dd32ad81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PACKAGE_NAME: VideoPlayer
   curve:
     serializedVersion: 2
     m_Curve:

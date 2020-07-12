@@ -3270,7 +3270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &479081149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,6 +3285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   host: 192.168.1.102
   port: 8888
+  isConnected: 0
 --- !u!4 &479081150
 Transform:
   m_ObjectHideFlags: 0
@@ -5830,7 +5831,7 @@ GameObject:
   - component: {fileID: 778506255}
   - component: {fileID: 778506254}
   m_Layer: 0
-  m_Name: Application Utility
+  m_Name: Application Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5845,7 +5846,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 778506253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d077c05dcff45bd8c1ba7fb7f94181, type: 3}
+  m_Script: {fileID: 11500000, guid: f4513635727ec49f6a7c85f3f88c0b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   supportedApps:
@@ -11589,7 +11590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1798477692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12280,6 +12281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c895b9837ff6a47d59c8db5d7051f846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PACKAGE_NAME: 
   curve:
     serializedVersion: 2
     m_Curve:

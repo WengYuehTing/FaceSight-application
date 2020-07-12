@@ -10,6 +10,7 @@ interface WindowBase {
     bool visibility { get; set; }
     void Open();
     void Close();
+    void OnTapped();
 }
 
 public class Window : MonoBehaviour, WindowBase
@@ -52,12 +53,16 @@ public class Window : MonoBehaviour, WindowBase
         }
     }
     
-    public Vector3 positionOffsets {get; set; }
-    public Vector3 eulerAngleOffsets { get; set; }
     
+    protected Vector3 positionOffsets { get; set; }
+    protected Vector3 eulerAngleOffsets { get; set; }
+
+    public string PACKAGE_NAME;
+    public AnimationCurve curve;
     protected float speedMultifier;
     protected Vector3 targetScale;
-    public AnimationCurve curve;
+    
+    
 
 
     protected virtual void Awake() {
@@ -81,6 +86,10 @@ public class Window : MonoBehaviour, WindowBase
 
     public void Close() {
         StartCoroutine(CloseAnimation()); 
+    }
+
+    public virtual void OnTapped() {
+        
     }
 
     IEnumerator OpenAnimation() {

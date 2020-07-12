@@ -64,6 +64,7 @@ public class VideoPlayerWindow : Window
         shortSeconds = 15.0f;
         longSeconds = 60.0f;
         isAnimatingFeedback = false;
+        PACKAGE_NAME = "VideoPlayer";
     }
 
     // Start is called before the first frame update

@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class HomeIcon : Icon
 {
     [Header("Interaction")]
+    public Window target;
     public Material normal;
     public Material hover;
     [Tooltip("The xy ratio to enlarge when hovering")]
     public float HoveredRatio;
-
+    
     private Vector3 highlightedScale;
     private Vector3 originalScale;
+    
+    
 
     protected override void Awake() {
         base.Awake();
@@ -36,6 +39,9 @@ public class HomeIcon : Icon
     
     public override void Activate() {
         parent.Close();
+        Window window = GameObject.Instantiate(target) as Window;
+        window.Open();
+        
     }
 
     protected override void OnHovered() {

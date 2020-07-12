@@ -138,7 +138,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  name: 
+  isActive: 0
   isHovering: 0
+  target: {fileID: 870841536463234883, guid: 4a5aa961230c14f7693adff92845b8ab, type: 3}
   normal: {fileID: 2100000, guid: 155afb7c96b4a439691c27bebaaf6179, type: 2}
   hover: {fileID: 2100000, guid: 8f51f04bb7c6a4d1c8ef4fc27f857aa9, type: 2}
   HoveredRatio: 1.1
@@ -187,7 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  name: 
+  isActive: 0
   isHovering: 0
+  target: {fileID: 0}
   normal: {fileID: 2100000, guid: 0b5b83bdb92634912bc9a768d76464b9, type: 2}
   hover: {fileID: 2100000, guid: a60e27a9d5d0346018caf9bd2a024bff, type: 2}
   HoveredRatio: 1.1
@@ -236,7 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  name: 
+  isActive: 0
   isHovering: 0
+  target: {fileID: 0}
   normal: {fileID: 2100000, guid: 4e00ffdc706c94398a1ca6b9d1838c41, type: 2}
   hover: {fileID: 2100000, guid: b1163646ce9b3401a9fb242306e17e30, type: 2}
   HoveredRatio: 1.1
@@ -382,7 +391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  name: 
+  isActive: 0
   isHovering: 0
+  target: {fileID: 3445696761728620151, guid: 53ff6bfe1be5b41cb8c5ae267b2a161a, type: 3}
   normal: {fileID: 2100000, guid: a445e200f5131471db2c699561cca6f3, type: 2}
   hover: {fileID: 2100000, guid: e35bb6b43c17b4801baa24d0282088ce, type: 2}
   HoveredRatio: 1.1
@@ -523,6 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3208b979c6826496d83e790ebe7bed86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PACKAGE_NAME: Home
   curve:
     serializedVersion: 2
     m_Curve:
