@@ -27,7 +27,7 @@ public class PhotoLibraryWindow : Window
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         scroller.normalizedPosition = new Vector2(0, scroller.normalizedPosition.y - Time.deltaTime/5);
     }
