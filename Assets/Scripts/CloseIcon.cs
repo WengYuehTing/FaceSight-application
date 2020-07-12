@@ -27,7 +27,6 @@ public class CloseIcon : Icon
     }
 
     public override void Activate() {
-        print("123");
         parent.Close();
     }
 

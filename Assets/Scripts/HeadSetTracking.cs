@@ -41,6 +41,7 @@ public class HeadSetTracking : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, raycastDistance))
 		{	
+			print(hit.collider.gameObject.name);
 			GameObject target = hit.collider.transform.parent.gameObject;
 			if(target.GetComponent<Icon>()) {
 				if(hoveredIcon != null) {

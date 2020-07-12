@@ -15,11 +15,11 @@ public class KeyboardBinder : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.H)) {
-            if(GameObject.FindObjectOfType<VideoPlayerWindow>() != null) {
-                VideoPlayerWindow window = GameObject.FindObjectOfType<VideoPlayerWindow>();
+            if(GameObject.FindObjectOfType<PhotoLibraryWindow>() != null) {
+                PhotoLibraryWindow window = GameObject.FindObjectOfType<PhotoLibraryWindow>();
                 window.Close();
             } else {
-                VideoPlayerWindow window = GameObject.Instantiate(utility.supportedApps[1]) as VideoPlayerWindow;
+                PhotoLibraryWindow window = GameObject.Instantiate(utility.supportedApps[2]) as PhotoLibraryWindow;
                 window.Open();
             }
         }
