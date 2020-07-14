@@ -85,7 +85,7 @@ public class AndroidClient : MonoBehaviour
             try {
                 recv = reader.ReadLine();
                 print(recv);
-                manager.Push(recv.Substring(0, recv.Length-1));
+                manager.Push(recv);
             } catch(Exception e) {
                 print(e.Message);
             }

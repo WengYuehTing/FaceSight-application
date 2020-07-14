@@ -18,6 +18,7 @@ public class ApplicationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print(actions.Count);
         if(actions.Count > 0) {
             string action = actions.Dequeue();
             Mapping(action);
@@ -36,7 +37,6 @@ public class ApplicationManager : MonoBehaviour
     }
 
     public void Mapping(string action) {
-        print(actions.Count);
         switch(action) {
             case "h":
                 Window prefab = Find("Home");
