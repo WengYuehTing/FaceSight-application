@@ -577,8 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19a9f29fac20d9242aa23d9d34898cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
-  slotDistance: 10
+  debug: 0
+  slotDistance: 20
   hoveredWindow: {fileID: 0}
   hoveredIcon: {fileID: 0}
 --- !u!20 &1255346628

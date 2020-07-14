@@ -18,7 +18,6 @@ public class ApplicationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(actions.Count);
         if(actions.Count > 0) {
             string action = actions.Dequeue();
             Mapping(action);
