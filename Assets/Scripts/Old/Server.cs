@@ -10,8 +10,6 @@ using System.Threading;
 
 public class Server : MonoBehaviour
 {
-	[SerializeField]
-    private Text connStatus = null;
 
 
     private byte connFlag = 0;

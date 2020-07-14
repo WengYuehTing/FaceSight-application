@@ -28,14 +28,17 @@ public class HeadSetTracking : MonoBehaviour {
 
 	void Update () {
 		
-		if(Input.isGyroAvailable) {
-			this.gameObject.transform.rotation = Quaternion.AngleAxis (90.0f, Vector3.right) * Input.gyro.attitude * Quaternion.AngleAxis (180.0f, Vector3.forward);
-		} else {
-			angle.x = (Input.acceleration.y * rotAngle.y);
-        	angle.y = (Input.acceleration.x * rotAngle.x);
-        	tempAngle = Vector3.Slerp(tempAngle, angle, Time.deltaTime * 5);
-        	transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(tempAngle), Time.deltaTime * 10);
+		if(!debug) {
+			if(SystemInfo.supportsGyroscope) {
+				this.gameObject.transform.rotation = Quaternion.AngleAxis (90.0f, Vector3.right) * Input.gyro.attitude * Quaternion.AngleAxis (180.0f, Vector3.forward);
+			} else {
+				angle.x = (Input.acceleration.y * rotAngle.y);
+				angle.y = (Input.acceleration.x * rotAngle.x);
+				tempAngle = Vector3.Slerp(tempAngle, angle, Time.deltaTime * 5);
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(tempAngle), Time.deltaTime * 10);
+			}
 		}
+		
 		
 
 		windowSlot.transform.position = transform.forward * slotDistance;
@@ -85,7 +88,7 @@ public class HeadSetTracking : MonoBehaviour {
         GUI.Label(new Rect(500, 300, 200, 40), "x:" + angle.x);
         GUI.Label(new Rect(500, 350, 200, 40), "y:" + angle.y);
         GUI.Label(new Rect(500, 400, 200, 40), "z:" + angle.z);
-		GUI.Label(new Rect(500, 450, 200, 40), "gyro1:" + Input.isGyroAvailable);
+		GUI.Label(new Rect(500, 450, 200, 40), "gyro1:" +  SystemInfo.supportsGyroscope);
 		GUI.Label(new Rect(500, 500, 200, 40), "gyro2:" + Input.gyro.attitude.ToString());
     }
 

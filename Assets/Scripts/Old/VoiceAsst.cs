@@ -10,8 +10,8 @@ public class VoiceAsst : MonoBehaviour
     public AudioSource audioSource;
     private VideoPlayer videoPlayer;
     
-    [SerializeField] private Text users;
-    [SerializeField] private Text assistent;
+    [SerializeField] private Text users = null;
+    [SerializeField] private Text assistent = null;
 
     public string[] users_to_speech = {"How's ", "the ", "weather ", "today."};
     public string AIResponse = "Looks like it's going to be hot and sunny tomorrow; \n the high should be about 32 degrees.";

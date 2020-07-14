@@ -11,7 +11,6 @@ public class Icon : MonoBehaviour
 
     [Header("Icon Base")]
     public Window parent;
-    [SerializeField] protected string name;
     [SerializeField] protected bool isActive;
     [ReadOnly, SerializeField] protected bool isHovering;
     
@@ -20,7 +19,6 @@ public class Icon : MonoBehaviour
         scale = Vector3.one;
         isHovering = false;
         isActive = true;
-        name = gameObject.name;
     }
 
     protected virtual void Start()
