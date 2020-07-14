@@ -55,6 +55,7 @@ public class HeadSetTracking : MonoBehaviour {
 				if(hoveredIcon != null) {
 					hoveredIcon.Leave();
 					hoveredIcon = null;
+					pointer.color = new Color(1f, 0f, 0f);
 				}
 				hoveredWindow = target.GetComponent<Window>(); 
 			} 

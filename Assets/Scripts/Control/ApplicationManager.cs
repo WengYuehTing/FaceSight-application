@@ -36,9 +36,10 @@ public class ApplicationManager : MonoBehaviour
     }
 
     public void Mapping(string action) {
+        print(actions.Count);
         switch(action) {
-            case "home":
-                Window prefab = Find("PhotoLibrary");
+            case "h":
+                Window prefab = Find("Home");
                 if(prefab != null) {
                     if(GameObject.FindObjectOfType<HomeWindow>() != null) {
                         Window window = GameObject.FindObjectOfType<Window>();
@@ -50,7 +51,7 @@ public class ApplicationManager : MonoBehaviour
                 }
                 break;
 
-            case "tap":
+            case "t":
                 if(Camera.main.GetComponent<HeadSetTracking>().hoveredIcon != null) {
                     Camera.main.GetComponent<HeadSetTracking>().hoveredIcon.Activate();
                 } else if(Camera.main.GetComponent<HeadSetTracking>().hoveredWindow != null) {
