@@ -15,11 +15,11 @@ public class KeyboardBinder : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.H)) {
-            manager.Push("home");
+            manager.Push("h");
         }
 
         if(Input.GetKeyDown(KeyCode.T)) {
-            manager.Push("tap");
+            manager.Push("t");
         }
     }
 }
