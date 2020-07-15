@@ -282,7 +282,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   normal: {fileID: 2100000, guid: fc281a68a36694742ae9d01acf5c7873, type: 2}
@@ -313,7 +312,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865090870423896756}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.93, z: 0}
   m_LocalScale: {x: 6, y: 3.375, z: 0.1}
   m_Children:
@@ -321,7 +320,7 @@ Transform:
   - {fileID: 2790395047297649605}
   m_Father: {fileID: 865090871006008935}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &865090870423896649
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -594,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865090871006008933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.6, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 865090871323784197}
@@ -763,7 +762,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865090871323784196}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 6, y: 0.5, z: 0.1}
   m_Children:
@@ -772,7 +771,7 @@ Transform:
   - {fileID: 865090869931186294}
   m_Father: {fileID: 865090871006008935}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &865090871323784216
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1133,7 +1132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &1936348680510292687
@@ -1186,7 +1184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &2318554741211012099
@@ -1779,7 +1776,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &5102467108135141019
@@ -1986,7 +1982,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &6017876967303935388
@@ -2039,7 +2034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &6573771268746268656
@@ -2256,7 +2250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &8263582574110789249
@@ -2309,7 +2302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
 --- !u!1 &8301271094889425528

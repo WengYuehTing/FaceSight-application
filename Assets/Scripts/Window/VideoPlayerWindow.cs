@@ -19,7 +19,8 @@ public class VideoPlayerWindow : Window
     [ReadOnly, SerializeField] protected double videoLength; 
     [ReadOnly, SerializeField] protected bool isPlaying;
     [ReadOnly, SerializeField] protected float shortSeconds;
-    [ReadOnly, SerializeField] protected float longSeconds; 
+    [ReadOnly, SerializeField] protected float longSeconds;
+    [SerializeField] protected float volume;
 
     [Header("Hierarchy")]
     [SerializeField] protected VideoPlayerIcon playPauseIcon;
@@ -50,8 +51,8 @@ public class VideoPlayerWindow : Window
     protected GameObject header;
     protected GameObject body;
     protected GameObject footer;
-    protected Slider progress;
-    protected Slider volume; 
+    protected Slider progressSlider;
+    protected Slider volumeSlider; 
     protected VideoPlayer videoPlayer; 
     protected AudioSource audioSource;
     
@@ -61,8 +62,10 @@ public class VideoPlayerWindow : Window
         visibility = true;
         positionOffsets = new Vector3(0.0f, 4.0f, 0.0f);
         targetScale = new Vector3(2.0f, 2.0f, 1.0f);
+        eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
         shortSeconds = 15.0f;
         longSeconds = 60.0f;
+        volume = 0.0f;
         isAnimatingFeedback = false;
         PACKAGE_NAME = "VideoPlayer";
     }
@@ -83,11 +86,12 @@ public class VideoPlayerWindow : Window
         videoLength = videoPlayer.length;
         isPlaying = videoPlayer.isPlaying;
 
-        progress.value = (float)currentProgress;
-        progress.maxValue = (float)videoLength;
+        progressSlider.value = (float)currentProgress;
+        progressSlider.maxValue = (float)videoLength;
 
-        audioSource.mute = (volume.value == 0.0f);
-        audioSource.volume = volume.value;
+        volumeSlider.value = volume;
+        audioSource.volume = volume;
+        audioSource.mute = (volume == 0.0f);
     
         if(audioSource.mute) {
             Material[] materials = volumeIcon.transform.GetChild(0).GetComponent<Renderer>().materials;
@@ -117,9 +121,9 @@ public class VideoPlayerWindow : Window
         Slider[] sliders = GetComponentsInChildren<Slider>();
         foreach(Slider slider in sliders) {
             if(slider.gameObject.name == "ProgressSlider") {
-                progress = slider;
+                progressSlider = slider;
             } else {
-                volume = slider;
+                volumeSlider = slider;
             }
         }
 

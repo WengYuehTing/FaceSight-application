@@ -10,7 +10,7 @@ public class HomeWindow : Window
     protected override void Awake() {
         base.Awake();
         targetScale = new Vector3(6.0f, 7.0f, 1.0f);
-        eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
+        eulerAngleOffsets = new Vector3(0.0f, 0.0f, 0.0f);
         visibility = true;
     }
     protected override void Start()

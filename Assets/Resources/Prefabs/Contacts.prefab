@@ -196,7 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -396,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -1218,7 +1216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -1793,7 +1790,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -2619,7 +2615,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -2949,7 +2944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -3237,7 +3231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -3678,7 +3671,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -4750,7 +4742,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -4780,7 +4771,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048298195854023018}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 0.5, z: 0.1}
   m_Children:
@@ -4789,7 +4780,7 @@ Transform:
   - {fileID: 7048298197179348248}
   m_Father: {fileID: 7048298196106689289}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &7048298195854023030
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4875,7 +4866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048298196106689291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 7048298195854023019}
@@ -5232,14 +5223,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048298196866756570}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.93, z: 0}
   m_LocalScale: {x: 4, y: 3.375, z: 0.1}
   m_Children:
   - {fileID: 9157986305915396713}
   m_Father: {fileID: 7048298196106689289}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7048298196866756391
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5409,7 +5400,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   normal: {fileID: 2100000, guid: 00c4eddadafef46d385728bed7e7d473, type: 2}
@@ -5541,7 +5531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
@@ -6062,7 +6051,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  name: 
   isActive: 0
   isHovering: 0
   HoveredRatio: 1.2
