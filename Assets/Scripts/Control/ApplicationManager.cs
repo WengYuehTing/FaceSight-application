@@ -51,10 +51,11 @@ public class ApplicationManager : MonoBehaviour
                 break;
 
             case "t":
-                if(Camera.main.GetComponent<HeadSetTracking>().hoveredIcon != null) {
-                    Camera.main.GetComponent<HeadSetTracking>().hoveredIcon.Activate();
-                } else if(Camera.main.GetComponent<HeadSetTracking>().hoveredWindow != null) {
-                    Camera.main.GetComponent<HeadSetTracking>().hoveredWindow.OnTapped();
+                Attention attention = Camera.main.transform.parent.GetComponent<Attention>();
+                if(attention.hoveredIcon != null) {
+                    attention.hoveredIcon.Activate();
+                } else if(attention.hoveredWindow != null) {
+                    attention.hoveredWindow.OnTapped();
                 }
                     
                 break;
