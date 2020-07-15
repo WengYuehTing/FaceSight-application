@@ -52,11 +52,16 @@ public class ApplicationManager : MonoBehaviour
 
             case "t":
                 Attention attention = Camera.main.transform.parent.GetComponent<Attention>();
-                if(attention.hoveredIcon != null) {
+                if (attention.hoveredIcon != null) {
                     attention.hoveredIcon.Activate();
-                } else if(attention.hoveredWindow != null) {
-                    attention.hoveredWindow.OnTapped();
                 }
+                else if (attention.hoveredSlider != null)
+                {
+                    attention.hoveredSlider.OnTapped(attention.hitPosition);
+                }
+                else if (attention.hoveredWindow != null) {
+                    attention.hoveredWindow.OnTapped();
+                } 
                     
                 break;
             

@@ -7,20 +7,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.Video;
-
+using System.IO;
 [RequireComponent(typeof(VideoPlayer))]
 [RequireComponent(typeof(AudioSource))]
 public class VideoPlayerWindow : Window
 {
-    [Header("Video Setting")]
+    [Header("Video Info")]
     [SerializeField] private string videoPath;
-    [SerializeField] private string renderTexturePath; 
+    [SerializeField] private string renderTexturePath;
+    [ReadOnly, SerializeField] protected int videoIndex;
     [ReadOnly, SerializeField] protected double currentProgress;
     [ReadOnly, SerializeField] protected double videoLength; 
     [ReadOnly, SerializeField] protected bool isPlaying;
     [ReadOnly, SerializeField] protected float shortSeconds;
     [ReadOnly, SerializeField] protected float longSeconds;
-    [SerializeField] protected float volume;
+    [ReadOnly, SerializeField] protected float volume;
 
     [Header("Hierarchy")]
     [SerializeField] protected VideoPlayerIcon playPauseIcon;
@@ -52,7 +53,7 @@ public class VideoPlayerWindow : Window
     protected GameObject body;
     protected GameObject footer;
     protected Slider progressSlider;
-    protected Slider volumeSlider; 
+    protected InteractiveSlider volumeSlider; 
     protected VideoPlayer videoPlayer; 
     protected AudioSource audioSource;
     
@@ -65,7 +66,8 @@ public class VideoPlayerWindow : Window
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
         shortSeconds = 15.0f;
         longSeconds = 60.0f;
-        volume = 0.0f;
+        volume = 20.0f;
+        videoIndex = 0;
         isAnimatingFeedback = false;
         PACKAGE_NAME = "VideoPlayer";
     }
@@ -75,22 +77,19 @@ public class VideoPlayerWindow : Window
     {
         base.Start();
         Setup();
-        Load();
+        Load(videoIndex);
     }
 
     protected override void Update()
     {
         base.Update();
-        
+
         currentProgress = videoPlayer.time;
         videoLength = videoPlayer.length;
         isPlaying = videoPlayer.isPlaying;
 
         progressSlider.value = (float)currentProgress;
         progressSlider.maxValue = (float)videoLength;
-
-        volumeSlider.value = volume;
-        audioSource.volume = volume;
         audioSource.mute = (volume == 0.0f);
     
         if(audioSource.mute) {
@@ -123,7 +122,7 @@ public class VideoPlayerWindow : Window
             if(slider.gameObject.name == "ProgressSlider") {
                 progressSlider = slider;
             } else {
-                volumeSlider = slider;
+                volumeSlider = slider as InteractiveSlider;
             }
         }
 
@@ -161,16 +160,19 @@ public class VideoPlayerWindow : Window
                 videoDurationText = mesh;
             }
         }
+
     }
 
-    protected void Load() {
+    protected void Load(int index) {
         if(videoPlayer.isPlaying && audioSource.isPlaying) {
-            videoPlayer.Pause();
-            audioSource.Pause();
+            videoPlayer.Stop();
+            audioSource.Stop();
         }
 
-        videoPlayer.clip = Resources.Load(videoPath) as VideoClip; 
-        videoPlayer.targetTexture = Resources.Load(renderTexturePath) as RenderTexture;
+        var info = Resources.LoadAll(PACKAGE_NAME + "/Video", typeof(VideoClip));
+        
+        videoPlayer.clip = info[index] as VideoClip; 
+        videoPlayer.targetTexture = Resources.Load(PACKAGE_NAME + "/Materials/Texture1280x720") as RenderTexture;
 
         videoPlayer.Play();
         audioSource.Play();
@@ -247,7 +249,8 @@ public class VideoPlayerWindow : Window
     }
 
     public void Next() {
-        
+        var info = Resources.LoadAll(PACKAGE_NAME + "/Video", typeof(VideoClip));
+        Load(++videoIndex % info.Length);
     }
 
     public void Mute() {
@@ -290,17 +293,25 @@ public class VideoPlayerWindow : Window
         
     }
 
-    private void EndReached(VideoPlayer vp)
-    {
-        print("finishing playing video");
-    }
+    
 
     private string FormatTime(double seconds) {
         int minute = (int)Mathf.Round((float)seconds / 60); 
         int second = (int)Mathf.Round((float)seconds % 60);
         return minute.ToString() + ":" + second.ToString("D2");        
     }
-    
 
+
+
+    private void EndReached(VideoPlayer vp)
+    {
+        print("finishing playing video");
+    }
+
+    public void OnVolumeValueChanged(float value)
+    {
+        volume = value;
+        audioSource.volume = value;
+    }
 
 }
