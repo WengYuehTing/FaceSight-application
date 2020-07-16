@@ -17,10 +17,9 @@ public class VideoPlayerIcon : Icon
     protected override void Awake() 
     {
         base.Awake();
-        scale = new Vector3(0.009166666f, 1.0f, 0.04240024f);
         hoveredRatio = 1.5f;
-        highlightedScale = scale * hoveredRatio;
-        originalScale = scale;
+        highlightedScale = transform.localScale * hoveredRatio;
+        originalScale = transform.localScale;
     }
     
     protected override void Start()
@@ -42,11 +41,11 @@ public class VideoPlayerIcon : Icon
 
     protected override void OnHovered() {
         base.OnHovered();
-        scale = highlightedScale;
+        transform.localScale = highlightedScale;
     }
 
     protected override void OnLeaved() {
         base.OnLeaved();
-        scale = originalScale;
+        transform.localScale = originalScale;
     }
 }

@@ -12,7 +12,6 @@ public class CloseIcon : Icon
     {
         base.Awake();
         isActive = true;
-        scale = new Vector3(0.011f, 1.0f, 0.097f);
     }
     
     protected override void Start()

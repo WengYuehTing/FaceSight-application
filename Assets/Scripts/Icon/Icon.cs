@@ -7,7 +7,6 @@ public class Icon : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    protected Vector3 scale { get; set; }
 
     [Header("Icon Base")]
     public Window parent;
@@ -16,7 +15,6 @@ public class Icon : MonoBehaviour
     
     protected virtual void Awake() {
         parent = transform.root.GetComponent<Window>();
-        scale = Vector3.one;
         isHovering = false;
         isActive = true;
     }
@@ -31,7 +29,6 @@ public class Icon : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        transform.localScale = scale;
     }
 
     public virtual void Activate() {

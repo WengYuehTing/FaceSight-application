@@ -1498,6 +1498,8 @@ MonoBehaviour:
   slotDistance: 20
   hoveredWindow: {fileID: 0}
   hoveredIcon: {fileID: 0}
+  hoveredSlider: {fileID: 0}
+  hitPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1500276630495610409
 GameObject:
   m_ObjectHideFlags: 0

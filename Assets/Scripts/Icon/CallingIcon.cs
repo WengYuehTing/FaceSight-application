@@ -16,9 +16,8 @@ public class CallingIcon : Icon
 
     protected override void Awake() {
         base.Awake();
-        scale = new Vector3(0.5f, 0.6f, 1.0f);
-        highlightedScale = scale * HoveredRatio;
-        originalScale = scale;
+        highlightedScale = transform.localScale * HoveredRatio;
+        originalScale = transform.localScale;
     }
 
     // Start is called before the first frame update
@@ -43,11 +42,11 @@ public class CallingIcon : Icon
 
     protected override void OnHovered() {
         base.OnHovered();
-        scale = highlightedScale;
+        transform.localScale = highlightedScale;
     }
 
     protected override void OnLeaved() {
         base.OnLeaved();
-        scale = originalScale;
+        transform.localScale = originalScale;
     }
 }

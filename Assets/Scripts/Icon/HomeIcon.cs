@@ -19,9 +19,8 @@ public class HomeIcon : Icon
 
     protected override void Awake() {
         base.Awake();
-        scale = new Vector3(0.1812623f, 0.1510519f, 1.0f);
-        highlightedScale = scale * HoveredRatio;
-        originalScale = scale;
+        highlightedScale = transform.localScale * HoveredRatio;
+        originalScale = transform.localScale;
     }
 
     // Start is called before the first frame update
@@ -46,7 +45,7 @@ public class HomeIcon : Icon
 
     protected override void OnHovered() {
         base.OnHovered();
-        scale = highlightedScale;
+        transform.localScale = highlightedScale;
         var materials = transform.GetChild(0).GetComponent<Renderer>().materials;
         materials[0] = hover;
         transform.GetChild(0).GetComponent<Renderer>().materials = materials;
@@ -54,7 +53,7 @@ public class HomeIcon : Icon
 
     protected override void OnLeaved() {
         base.OnLeaved();
-        scale = originalScale;
+        transform.localScale = originalScale;
         var materials = transform.GetChild(0).GetComponent<Renderer>().materials;
         materials[0] = normal;
         transform.GetChild(0).GetComponent<Renderer>().materials = materials;

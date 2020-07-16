@@ -8,7 +8,7 @@ public class PhotoLibraryImageIcon : Icon
     // Start is called before the first frame update
     protected override void Awake() {
         base.Awake();
-        scale = new Vector3(0.3f, 0.4f, 1f);
+        transform.localScale = new Vector3(0.3f, 0.4f, 1f);
         
     }
 

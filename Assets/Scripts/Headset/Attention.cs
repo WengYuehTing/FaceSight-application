@@ -54,10 +54,16 @@ public class Attention : MonoBehaviour
 			if(hit.collider.gameObject.GetComponent<InteractiveSlider>())
             {
 				hoveredSlider = hit.collider.gameObject.GetComponent<InteractiveSlider>();
-				pointer.color = new Color(0f, 1f, 0f);
 			} else 
             {
 				hoveredSlider = null;
+			}
+
+			if(hoveredSlider != null || hoveredIcon != null)
+            {
+				pointer.color = new Color(0f, 1f, 0f);
+			} else
+            {
 				pointer.color = new Color(1f, 0f, 0f);
 			}
 		}
