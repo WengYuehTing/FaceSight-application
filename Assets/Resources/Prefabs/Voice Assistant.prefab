@@ -75,7 +75,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 1
+    m_LineSpacing: 1.2
   m_Text: 
 --- !u!1 &6077869457088687879
 GameObject:
