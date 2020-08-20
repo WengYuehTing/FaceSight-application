@@ -47,7 +47,7 @@ public class AndroidClient : MonoBehaviour
         {
             tcpClient = new TcpClient();
             
-            IPAddress ipAddress = Dns.GetHostEntry(host).AddressList[0];
+            IPAddress ipAddress = IPAddress.Parse(host);
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, port);
             tcpClient.Connect(ipEndPoint);
             
@@ -55,7 +55,7 @@ public class AndroidClient : MonoBehaviour
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
             isConnected = true;
-
+            
             recvThread = new Thread(new ThreadStart(Read));
             recvThread.Start();
         }

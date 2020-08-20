@@ -37,6 +37,44 @@ public class ApplicationManager : MonoBehaviour
 
     public void Mapping(string action) {
         switch(action) {
+            
+            case "left nose wing":
+                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortBackward();
+                }
+                break;
+            
+            case "right nose wing":
+                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortForward();
+                }
+                break;
+            
+            case "nose tip":
+                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Play_OR_Pause();
+                }
+                break;
+            
+            case "right cheek":
+                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Next();
+                }
+                break;
+
+            case "left cheek":
+                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Last();
+                }
+                break;
+            
+            case "middle of upper or lower lips":
+                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Mute();
+                }
+                break;
+
+            case "chin":
             case "h":
                 Window prefab = Find("Home");
                 if(prefab != null) {

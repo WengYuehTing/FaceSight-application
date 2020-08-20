@@ -253,6 +253,16 @@ public class VideoPlayerWindow : Window
         Load(++videoIndex % info.Length);
     }
 
+    public void Last() {
+        var info = Resources.LoadAll(PACKAGE_NAME + "/Video", typeof(VideoClip));
+        if(videoIndex == 0) {
+            videoIndex = info.Length-1;
+        }else{
+            --videoIndex;
+        }
+        Load(videoIndex);
+    }
+
     public void Mute() {
         audioSource.mute = !audioSource.mute;
     }
