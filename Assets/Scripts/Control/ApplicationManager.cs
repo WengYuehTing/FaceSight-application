@@ -11,6 +11,11 @@ public class ApplicationManager : MonoBehaviour
     void Start()
     {
         actions = new Queue<string>();
+        Invoke("test", 2.0f);
+    }
+
+    public void test() {
+        Push("h");
     }
 
     
@@ -105,6 +110,8 @@ public class ApplicationManager : MonoBehaviour
             
         }
     }
+
+    
   
     public void Push(string action) {
         actions.Enqueue(action);

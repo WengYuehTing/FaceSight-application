@@ -105,6 +105,10 @@ public class VideoPlayerWindow : Window
         string currentProgressFormat = FormatTime(currentProgress);
         string videoLengthFormat = FormatTime(videoLength);
         videoDurationText.text = currentProgressFormat + " / " + videoLengthFormat;
+
+        if(Input.GetKeyDown(KeyCode.F)) {
+            ShortForward();
+        }
     }
 
     protected void Setup() {
@@ -306,7 +310,7 @@ public class VideoPlayerWindow : Window
     
 
     private string FormatTime(double seconds) {
-        int minute = (int)Mathf.Round((float)seconds / 60); 
+        int minute = (int)Mathf.Floor((float)seconds / 60); 
         int second = (int)Mathf.Round((float)seconds % 60);
         return minute.ToString() + ":" + second.ToString("D2");        
     }
