@@ -17,7 +17,7 @@ future.
 
 
 ## Application
-The demonstrated AR applications with which you can perform on-face gestures to interface, including VideoPlayer, Photo Browser, Voice Assistant etc. For more details, please refer to the [paper](https://pi.cs.tsinghua.edu.cn/lab/papers/FaceSight.pdf).
+The demonstrated AR applications with which you can perform on-face gestures to interact, including VideoPlayer, Photo Browser, Voice Assistant etc. For more details, please refer to the [paper](https://pi.cs.tsinghua.edu.cn/lab/papers/FaceSight.pdf).
 
 ![demo](./demo.gif)
 
