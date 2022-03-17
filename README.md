@@ -21,4 +21,4 @@ The demonstrated AR applications with which you can perform on-face gestures to 
 
 ![demo](./demo.gif)
 
-The application is built on [Nreal Light AR glasses](https://www.nreal.ai/light/) which runs Android operating system. Using nrsdk for development in unity and vysor for distribution.
+The application is built on [Nreal Light AR glasses](https://www.nreal.ai/light/) which runs Android operating system. Using NRSDK for development in unity and vysor for distribution.
