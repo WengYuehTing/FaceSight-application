@@ -17,8 +17,10 @@ future.
 
 
 ## Application
-The demonstrated AR applications with which you can perform on-face gestures to interact, including VideoPlayer, Photo Browser, Voice Assistant etc. For more details, please refer to the [paper](https://pi.cs.tsinghua.edu.cn/lab/papers/FaceSight.pdf).
+The demonstrated AR applications with which you can perform on-face gestures to interact, including VideoPlayer, Photo Browser, Voice Assistant etc. The applications were built on [Nreal Light AR glasses](https://www.nreal.ai/light/) which runs Android operating system. (Using NRSDK for unity development and vysor for distribution) 
 
 ![demo](./demo.gif)
 
-The application is built on [Nreal Light AR glasses](https://www.nreal.ai/light/) which runs Android operating system. Using NRSDK for development in unity and vysor for distribution.
+For more details, please refer to the [paper](https://pi.cs.tsinghua.edu.cn/lab/papers/FaceSight.pdf).
+
+
