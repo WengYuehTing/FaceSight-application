@@ -10,7 +10,7 @@ interface WindowBase {
     bool visibility { get; set; }
     void Open();
     void Close();
-    void OnTapped();
+    int OnTapped();
 }
 
 public class Window : MonoBehaviour, WindowBase
@@ -88,8 +88,8 @@ public class Window : MonoBehaviour, WindowBase
         StartCoroutine(CloseAnimation()); 
     }
 
-    public virtual void OnTapped() {
-        
+    public virtual int OnTapped() {
+        return 0;
     }
 
     IEnumerator OpenAnimation() {

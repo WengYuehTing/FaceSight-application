@@ -18,7 +18,27 @@ public class KeyboardBinder : MonoBehaviour
             manager.Push("h");
         }
 
-        if(Input.GetKeyDown(KeyCode.T)) {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            manager.Push("c");
+        }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            manager.Push("v");
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            manager.Push("i");
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            manager.Push("p");
+        }
+
+        if (Input.GetKeyDown(KeyCode.T)) {
             manager.Push("t");
         }
     }

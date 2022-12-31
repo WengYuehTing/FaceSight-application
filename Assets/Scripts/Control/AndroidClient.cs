@@ -30,7 +30,6 @@ public class AndroidClient : MonoBehaviour
 
     void Update()
     {
-        //Write("Hello");
     }
 
     void OnApplicationQuit()

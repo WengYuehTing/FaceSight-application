@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 public class Attention : MonoBehaviour
 {
 	[SerializeField] private float slotDistance;
-	
-	private Image pointer;
 	private GameObject windowSlot;
 
 	[Header("Interaction")]
@@ -16,14 +14,58 @@ public class Attention : MonoBehaviour
 	public Icon hoveredIcon;
 	public InteractiveSlider hoveredSlider;
 	public Vector3 hitPosition;
+	private Window lastHoveredWindow;
+
+	[Header("Pointer")]
+	public Pointer pointer;
+
+	private string mode_to_send = "idle";
+	public AndroidClient client;
+
 
 	void Start () {
-		pointer = GameObject.Find("Pointer").GetComponent<Image>();
+
+		
 		windowSlot = GameObject.Find("WindowSlot");
 		hitPosition = Vector3.zero;
 	}
 
+	void FindMode()
+    {
+		print(mode_to_send);
+		if(hoveredWindow == null)
+        {
+			client.Write("0");
+        } else
+        {
+			if (hoveredWindow is VideoPlayerWindow)
+			{
+				client.Write("5");
+			}
+			else if (hoveredWindow is PhotoLibraryWindow)
+			{
+				client.Write("2");
+			}
+			else if (hoveredWindow is ContactsWindow)
+			{
+				client.Write("3");
+			}
+			else if (hoveredWindow is VoiceWindow)
+			{
+				client.Write("4");
+			}
+			else
+			{
+				client.Write("1");
+			}
+        }
+
+		lastHoveredWindow = hoveredWindow;
+    } 
+
 	void Update () {
+		FindMode();
+		pointer = GameObject.FindObjectOfType<Pointer>();
 		windowSlot.transform.position = transform.forward * slotDistance;
 
 		var center = new Vector2(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2);
@@ -40,13 +82,19 @@ public class Attention : MonoBehaviour
 				}
 				hoveredIcon = target.GetComponent<Icon>(); 
 				hoveredWindow = hoveredIcon.parent;
-				pointer.color = new Color(0f,1f,0f);
+				if (pointer != null)
+				{
+					pointer.Hit();
+				}
 				hoveredIcon.Hover();
 			} else if(target.GetComponent<Window>()) {
 				if(hoveredIcon != null) {
 					hoveredIcon.Leave();
 					hoveredIcon = null;
-					pointer.color = new Color(1f, 0f, 0f);
+					if (pointer != null)
+					{
+						pointer.Normal();
+					}
 				}
 				hoveredWindow = target.GetComponent<Window>(); 
 			} 
@@ -61,10 +109,16 @@ public class Attention : MonoBehaviour
 
 			if(hoveredSlider != null || hoveredIcon != null)
             {
-				pointer.color = new Color(0f, 1f, 0f);
+				if (pointer != null)
+				{
+					pointer.Hit();
+				}
 			} else
             {
-				pointer.color = new Color(1f, 0f, 0f);
+				if (pointer != null)
+				{
+					pointer.Normal();
+				}
 			}
 		}
 		else
@@ -74,7 +128,10 @@ public class Attention : MonoBehaviour
 			hoveredIcon = null;
 			hoveredWindow = null;
 			hoveredSlider = null;
-			pointer.color = new Color(1f, 0f, 0f);
+			if (pointer != null)
+            {
+				pointer.Normal();
+			}
 		}
 		
 	}

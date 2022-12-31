@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716759900395416803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.467, y: 0.20000002, z: 0.015001297}
+  m_LocalPosition: {x: -0.467, y: 0.20000002, z: 0.12}
   m_LocalScale: {x: 0.01443, y: 0.1119, z: 1}
   m_Children: []
   m_Father: {fileID: 1601858255515534744}
@@ -407,7 +407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865090870486986791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.37, y: 0.02, z: -0.53}
+  m_LocalPosition: {x: -0.39, y: 0.02, z: -0.53}
   m_LocalScale: {x: 0.06, y: 1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 865090871323784197}
@@ -460,14 +460,14 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865090870486986791}
-  m_Text: Photo Library
+  m_Text: "\u76F8\u518C"
   m_OffsetZ: 0
-  m_CharacterSize: 0.5
-  m_LineSpacing: 1
+  m_CharacterSize: 0.2
+  m_LineSpacing: 1.2
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 12
+  m_FontSize: 26
   m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -2562,7 +2562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9161988406518321544}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.28, y: -0, z: 0.470002}
+  m_LocalPosition: {x: -0.35, y: -0, z: 0.470002}
   m_LocalScale: {x: 0.06, y: 0.98765427, z: 0.10000002}
   m_Children: []
   m_Father: {fileID: 7045692404659669678}
@@ -2615,14 +2615,14 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9161988406518321544}
-  m_Text: YueTing
+  m_Text: "\u6211"
   m_OffsetZ: 0
-  m_CharacterSize: 0.5
+  m_CharacterSize: 0.2
   m_LineSpacing: 1
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 8
+  m_FontSize: 20
   m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}

@@ -1015,9 +1015,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'YueTing
-
-'
+  m_Text: "\u6881\u8001\u677F"
 --- !u!1 &1460509267594122429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,7 +2325,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Iverson
+  m_Text: "\u5E93\u91CC"
 --- !u!1 &2850913039294302767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2633,7 +2631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5582924764955400578
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2733,7 +2731,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: John
+  m_Text: "\u6881\u8001\u677F"
 --- !u!1 &3691435184374029361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3785,7 +3783,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Amber
+  m_Text: "\u5F20\u5982\u610F"
 --- !u!1 &5554734059415228217
 GameObject:
   m_ObjectHideFlags: 0
@@ -3862,7 +3860,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chris
+  m_Text: "\u79E6\u8001\u677F"
 --- !u!1 &6002212866095906315
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,7 +4012,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Diana
+  m_Text: "\u8587\u8587"
 --- !u!1 &6062353329458996709
 GameObject:
   m_ObjectHideFlags: 0
@@ -4237,7 +4235,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Allen
+  m_Text: "\u5B59\u6F02\u4EAE"
 --- !u!1 &6194613611656214509
 GameObject:
   m_ObjectHideFlags: 0
@@ -4520,7 +4518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 76bc80e835ba74e7d83a98e7ad4f6f7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 14c3c8f09aae544059fc783f80214de5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5183,14 +5181,14 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7048298196619451721}
-  m_Text: Contacts
+  m_Text: "\u901A\u8BAF\u5F55"
   m_OffsetZ: 0
-  m_CharacterSize: 0.5
+  m_CharacterSize: 0.2
   m_LineSpacing: 1
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 12
+  m_FontSize: 26
   m_FontStyle: 1
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -5480,7 +5478,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Me
+  m_Text: "\u6211"
 --- !u!1 &7086868518874429027
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,7 +6563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1372967341806109010
 RectTransform:
   m_ObjectHideFlags: 0

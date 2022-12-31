@@ -14,6 +14,9 @@ public class HomeIcon : Icon
     
     private Vector3 highlightedScale;
     private Vector3 originalScale;
+
+    public string target2 = "";
+    public ApplicationManager manager;
     
     
 
@@ -27,6 +30,7 @@ public class HomeIcon : Icon
     protected override void Start()
     {
         base.Start();
+        manager = GameObject.FindObjectOfType<ApplicationManager>();
     }
 
     // Update is called once per frame

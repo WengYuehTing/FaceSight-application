@@ -22,6 +22,7 @@ public class VideoPlayerWindow : Window
     [ReadOnly, SerializeField] protected float shortSeconds;
     [ReadOnly, SerializeField] protected float longSeconds;
     [ReadOnly, SerializeField] protected float volume;
+    private float prevVolume = 0.0f;
 
     [Header("Hierarchy")]
     [SerializeField] protected VideoPlayerIcon playPauseIcon;
@@ -67,6 +68,7 @@ public class VideoPlayerWindow : Window
         shortSeconds = 15.0f;
         longSeconds = 60.0f;
         volume = 20.0f;
+        prevVolume = 20.0f;
         videoIndex = 0;
         isAnimatingFeedback = false;
         PACKAGE_NAME = "VideoPlayer";
@@ -90,6 +92,7 @@ public class VideoPlayerWindow : Window
 
         progressSlider.value = (float)currentProgress;
         progressSlider.maxValue = (float)videoLength;
+        volume = volumeSlider.value;
         audioSource.mute = (volume == 0.0f);
     
         if(audioSource.mute) {
@@ -107,7 +110,12 @@ public class VideoPlayerWindow : Window
         videoDurationText.text = currentProgressFormat + " / " + videoLengthFormat;
 
         if(Input.GetKeyDown(KeyCode.F)) {
-            ShortForward();
+            Next();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Last();
         }
     }
 
@@ -175,11 +183,19 @@ public class VideoPlayerWindow : Window
 
         var info = Resources.LoadAll(PACKAGE_NAME + "/Video", typeof(VideoClip));
         
-        videoPlayer.clip = info[index] as VideoClip; 
-        videoPlayer.targetTexture = Resources.Load(PACKAGE_NAME + "/Materials/Texture1280x720") as RenderTexture;
+        videoPlayer.clip = info[index] as VideoClip;
+        int num = GameObject.FindObjectsOfType<VideoPlayerWindow>().Length;
+        RenderTexture texture = GameObject.FindObjectOfType<ApplicationManager>().renderTextures[num - 1];
+        print(texture.name);
+        videoPlayer.targetTexture = texture;
+        //videoPlayer.targetTexture = Resources.Load(PACKAGE_NAME + "/Materials/Texture1280x720") as RenderTexture;
 
         videoPlayer.Play();
         audioSource.Play();
+
+        videoPlayer.time = 0.0f;
+        audioSource.time = 0.0f;
+
     }
 
     public void Play_OR_Pause() {
@@ -268,7 +284,15 @@ public class VideoPlayerWindow : Window
     }
 
     public void Mute() {
-        audioSource.mute = !audioSource.mute;
+        if(volumeSlider.value == 0.0f)
+        {
+            volumeSlider.value = prevVolume;
+        }
+        else
+        {
+            prevVolume = volumeSlider.value;
+            volumeSlider.value = 0.0f;
+        }
     }
 
     private IEnumerator AnimateFeedback(Material material) {

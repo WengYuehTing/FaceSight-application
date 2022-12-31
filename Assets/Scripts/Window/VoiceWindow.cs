@@ -9,6 +9,9 @@ public class VoiceWindow : Window
 {
     [SerializeField] private Text users = null;
     [SerializeField] private Text assistent = null;
+
+    public GameObject[] userContents;
+    public GameObject[] aiContents;
     public AudioSource audioSource;
     private VideoPlayer videoPlayer;
 
@@ -23,15 +26,19 @@ public class VoiceWindow : Window
     protected override void Awake() {
         base.Awake();
         visibility = true;
-        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f);
+        positionOffsets = new Vector3(0.0f, -4.0f, 0.0f);
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
         targetScale = new Vector3(2.0f, 2.0f, 2.0f);
+#if UNITY_EDITOR
+        positionOffsets = new Vector3(0.0f, 3.0f, 0.0f); // 
+#endif
     }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         isStartingGenerating = true;
+        AIResponse = AIResponse.Replace("\\n", "\n");
     }
 
     // Update is called once per frame
@@ -41,6 +48,13 @@ public class VoiceWindow : Window
             generateTime += Time.deltaTime;
             if(generateTime >= durations[index]) {
                 users.text += users_to_speech[index++] ; 
+                if (index == 1)
+                {
+                    foreach (GameObject gameObject in userContents)
+                    {
+                        gameObject.active = true;
+                    }
+                }
                 
                 if(index >= users_to_speech.Length) {
                     isStartingGenerating = false;
@@ -59,5 +73,9 @@ public class VoiceWindow : Window
 
     private void OnFinishSaying() {
         assistent.text = AIResponse;
+        foreach (GameObject gameObject in aiContents)
+        {
+            gameObject.active = true;
+        }
     }
 }

@@ -26,7 +26,7 @@ public class PhotoLibraryWindow : Window
     protected override void Awake() {
         base.Awake();
         visibility = true;
-        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f);
+        positionOffsets = new Vector3(0.0f, 0.0f, 0.0f);
         targetScale = new Vector3(2.0f, 2.0f, 2.0f);
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
         selected = false;
@@ -55,8 +55,15 @@ public class PhotoLibraryWindow : Window
         } 
     }
 
-    public override void OnTapped() {
-        Cancel();
+    public override int OnTapped() {
+        if(selected)
+        {
+            Cancel();
+            return 1;
+        } else
+        {
+            return 0;
+        }
     }
 
     protected float GetSliderY() {

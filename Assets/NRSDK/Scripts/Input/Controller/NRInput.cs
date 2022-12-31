@@ -327,10 +327,11 @@ namespace NRKernal
                 NREmulatorManager.Inited = true;
                 GameObject.Instantiate(Resources.Load("Prefabs/NREmulatorManager"));
             }
-            if (!GameObject.Find("NREmulatorController"))
+            /*if (!GameObject.Find("NREmulatorController"))
             {
                 Instantiate(Resources.Load<GameObject>("Prefabs/NREmulatorController"));
             }
+            */
         }
 
         private Transform GetCameraCenter()
