@@ -237,7 +237,7 @@ public class ApplicationManager : MonoBehaviour
                         
                         PhotoLibraryWindow plw = Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as PhotoLibraryWindow;
 
-                        swipeSequence.Add(value / 400.0f);
+                        swipeSequence.Add(value / 133.0F);
                         if (swipeSequence.Count > 2)
                         {
                             swipeSequence.RemoveAt(0);

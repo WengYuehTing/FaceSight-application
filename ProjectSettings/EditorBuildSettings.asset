@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/FaceSightDemo.unity
     guid: 11051bb86ffad58418de983a985d207a
+  - enabled: 0
+    path: Assets/NRSDK/Demos/Input-ControllerInfo.unity
+    guid: 6ef6276ed2b85294cac90487e2b5ee3d
+  - enabled: 0
+    path: Assets/NRSDK/Demos/Input-VirtualController.unity
+    guid: 8438388fcd9d9714f81e1bea09d02c18
   m_configObjects: {}
