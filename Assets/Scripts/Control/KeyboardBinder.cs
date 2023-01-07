@@ -41,5 +41,10 @@ public class KeyboardBinder : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T)) {
             manager.Push("t");
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            manager.Push("s");
+        }
     }
 }

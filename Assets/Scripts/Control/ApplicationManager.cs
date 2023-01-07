@@ -57,6 +57,24 @@ public class ApplicationManager : MonoBehaviour
     }
 
     public void Mapping(string action) {
+        if (action.StartsWith("speech_result:"))
+        {
+            string userSpeech = action.Split(':')[1];
+            Window contact = Find("Contacts");
+            if (contact != null)
+            {
+                ContactsWindow cw = GameObject.Instantiate(contact) as ContactsWindow;
+                cw.Open();
+                cw.Make(userSpeech);
+            }
+
+            if (Find("PreContact") != null)
+            {
+                GameObject.FindObjectOfType<PreContactsWindow>().Close();
+            }
+            return;
+        }
+
         switch(action) {
             case "gentle push left nose wing":
                 if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
@@ -96,6 +114,14 @@ public class ApplicationManager : MonoBehaviour
 
             case "c":  
             case "phone":
+                Window pc = Find("PreContact");
+                if (pc != null)
+                {
+                    PreContactsWindow pcw = GameObject.Instantiate(pc) as PreContactsWindow;
+                    pcw.Open();
+                }
+                break;
+                /*
                 Window contactsPrefab = Find("Contacts");
                 if (contactsPrefab != null)
                 {
@@ -111,6 +137,7 @@ public class ApplicationManager : MonoBehaviour
                     }
                 }
                 break;
+                */
 
             case "v":
             case "cover mouth":
@@ -191,6 +218,8 @@ public class ApplicationManager : MonoBehaviour
                     }
                 }
                 break;
+
+
 
             case "nip":
             case "one finger":

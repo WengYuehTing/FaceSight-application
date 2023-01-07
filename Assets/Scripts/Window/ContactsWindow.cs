@@ -17,8 +17,6 @@ public class ContactsWindow : Window
     [SerializeField] protected Text nameOfCalledPerson;
     protected bool isCalling;
 
-
-
     protected override void Awake() {
         base.Awake();
         visibility = true;
@@ -50,6 +48,14 @@ public class ContactsWindow : Window
     public void Scroll(float value) {
         float target = Mathf.Clamp(scroller.normalizedPosition.y + value, 0.0f, 1.0f);
         scroller.normalizedPosition = new Vector2(0, target);
+    }
+
+    public void Make(string name)
+    {
+        if (isCalling) { return; }
+        page1.SetActive(false);
+        page2.SetActive(true);
+        nameOfCalledPerson.text = name;
     }
 
     public void Call(Sprite sprite, string name) {
