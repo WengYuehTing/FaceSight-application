@@ -185,9 +185,14 @@ public class VideoPlayerWindow : Window
         
         videoPlayer.clip = info[index] as VideoClip;
         int num = GameObject.FindObjectsOfType<VideoPlayerWindow>().Length;
-        RenderTexture texture = GameObject.FindObjectOfType<ApplicationManager>().renderTextures[num - 1];
-        print(texture.name);
-        videoPlayer.targetTexture = texture;
+        if (GameObject.FindObjectOfType<ApplicationManager>())
+        {
+            videoPlayer.targetTexture = GameObject.FindObjectOfType<ApplicationManager>().renderTextures[num - 1];
+        }
+        else
+        {
+            videoPlayer.targetTexture = GameObject.FindObjectOfType<ExperimentManager>().renderTextures[num - 1];
+        }
         //videoPlayer.targetTexture = Resources.Load(PACKAGE_NAME + "/Materials/Texture1280x720") as RenderTexture;
 
         videoPlayer.Play();

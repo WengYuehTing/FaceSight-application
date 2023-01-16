@@ -32,6 +32,7 @@ public class Attention : MonoBehaviour
 
 	void FindMode()
     {
+		return;
 		print(mode_to_send);
 		if(hoveredWindow == null)
         {

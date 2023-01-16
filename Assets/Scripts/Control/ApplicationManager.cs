@@ -60,17 +60,22 @@ public class ApplicationManager : MonoBehaviour
         if (action.StartsWith("speech_result:"))
         {
             string userSpeech = action.Split(':')[1];
-            Window contact = Find("Contacts");
-            if (contact != null)
-            {
-                ContactsWindow cw = GameObject.Instantiate(contact) as ContactsWindow;
-                cw.Open();
-                cw.Make(userSpeech);
-            }
-
             if (Find("PreContact") != null)
             {
-                GameObject.FindObjectOfType<PreContactsWindow>().Close();
+                PreContactsWindow pcw = GameObject.FindObjectOfType<PreContactsWindow>();
+                if (pcw)
+                {
+                    pcw.Close();
+
+                    Window contact = Find("Contacts");
+                    if (contact != null)
+                    {
+                        ContactsWindow cw = GameObject.Instantiate(contact) as ContactsWindow;
+                        cw.Open();
+                        cw.Make(userSpeech);
+                    }
+                }
+                
             }
             return;
         }
@@ -88,7 +93,7 @@ public class ApplicationManager : MonoBehaviour
                 }
                 break;
             
-            case "tap nose tip":
+            case "nose tip":
                 if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
                     (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Play_OR_Pause();
                 }

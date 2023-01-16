@@ -20,10 +20,12 @@ public class AndroidClient : MonoBehaviour
     private Thread recvThread; 
 
     private ApplicationManager manager;
+    private ExperimentManager experiment;
 
     private void Start()
     {
         manager = GameObject.FindObjectOfType<ApplicationManager>();
+        experiment = GameObject.FindObjectOfType<ExperimentManager>();
         setupSocket();
     }
 
@@ -84,7 +86,14 @@ public class AndroidClient : MonoBehaviour
             try {
                 recv = reader.ReadLine();
                 print(recv);
-                manager.Push(recv);
+                if (manager)
+                {
+                    manager.Push(recv);
+                }
+                if (experiment)
+                {
+                    experiment.Push(recv);
+                }
             } catch(Exception e) {
                 print(e.Message);
             }
