@@ -20,61 +20,30 @@ public class ExperimentObject3 : ExperimentObject
     {
         switch (action)
         {
-            case "x":
-            case "gentle push left nose wing":
-                if (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow)
-                {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortBackward();
-                    client.Write("backward: " + (Time.time - currentTime).ToString());
-                }
-                break;
-
-            case "v":
-            case "gentle push right nose wing":
-                if (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow)
-                {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortForward();
-                    client.Write("forward: " + (Time.time - currentTime).ToString());
-                }
-                break;
-
             case "c":
-            case "nose tip":
-                if (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow)
+            case "cover mouth":
+                Window voicePrefab = Find("VoiceAssistant");
+                if (voicePrefab != null)
                 {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Play_OR_Pause();
-                    client.Write("PlayPause: " + (Time.time - currentTime).ToString());
-                }
-                break;
-
-            case "b":
-            case "rude push right nose wing":
-                if (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow)
-                {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Next();
-                    client.Write("next: " + (Time.time - currentTime).ToString());
-                }
-                break;
-
-            case "z":
-            case "rude push left nose wing":
-                if (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow)
-                {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Last();
-                    client.Write("last: " + (Time.time - currentTime).ToString());
-                }
-                break;
-
-            case "n":
-                if (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow)
-                {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Mute();
-                    client.Write("mute: " + (Time.time - currentTime).ToString());
+                    if (GameObject.FindObjectOfType<VoiceWindow>() == null)
+                    {
+                        VoiceWindow voiceWindow = GameObject.Instantiate(voicePrefab) as VoiceWindow;
+                        voiceWindow.Open();
+                        client.Write("3: voice: " + (Time.time - currentTime).ToString());
+                    }
                 }
                 break;
 
             case "s":
                 currentTime = Time.time;
+                break;
+
+            case "release":
+                VoiceWindow vw = GameObject.FindObjectOfType<VoiceWindow>();
+                if (vw != null)
+                {
+                    vw.Close();
+                }
                 break;
 
             default:

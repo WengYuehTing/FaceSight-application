@@ -117,6 +117,11 @@ public class ExperimentManager : MonoBehaviour
         {
             Push("b");
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Push("n");
+        }
     }
 
     public void Mapping(string action)
@@ -124,6 +129,12 @@ public class ExperimentManager : MonoBehaviour
         switch (action)
         {
             case "1":
+
+                foreach (Window obj in GameObject.FindObjectsOfType<Window>())
+                {
+                    Destroy(obj.gameObject);
+                }
+
                 currentTask = 1;
                 for (int i = 0; i < objects.Length; ++i)
                 {
@@ -139,22 +150,13 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case "2":
-                currentTask = 2;
-                for (int i = 0; i < objects.Length; ++i)
-                {
-                    if (i == currentTask - 1)
-                    {
-                        objects[i].gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        objects[i].gameObject.SetActive(false);
-                    }
-                }
-                break;
 
-            case "3":
-                currentTask = 3;
+                foreach (Window obj in GameObject.FindObjectsOfType<Window>())
+                {
+                    Destroy(obj.gameObject);
+                }
+
+                currentTask = 2;
                 for (int i = 0; i < objects.Length; ++i)
                 {
                     if (i == currentTask - 1)
@@ -174,14 +176,74 @@ public class ExperimentManager : MonoBehaviour
                 }
                 break;
 
+            case "3":
+
+                foreach (Window obj in GameObject.FindObjectsOfType<Window>())
+                {
+                    Destroy(obj.gameObject);
+                }
+
+                currentTask = 3;
+                for (int i = 0; i < objects.Length; ++i)
+                {
+                    if (i == currentTask - 1)
+                    {
+                        objects[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        objects[i].gameObject.SetActive(false);
+                    }
+                }
+                break;
+
             case "4":
+
+                foreach (Window obj in GameObject.FindObjectsOfType<Window>())
+                {
+                    Destroy(obj.gameObject);
+                }
+
                 currentTask = 4;
-                objects[3].gameObject.SetActive(true);
+                for (int i = 0; i < objects.Length; ++i)
+                {
+                    if (i == currentTask - 1)
+                    {
+                        objects[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        objects[i].gameObject.SetActive(false);
+                    }
+                }
                 break;
 
             case "5":
+
+                foreach (Window obj in GameObject.FindObjectsOfType<Window>())
+                {
+                    Destroy(obj);
+                }
+
+
                 currentTask = 5;
-                objects[4].gameObject.SetActive(true);
+                for (int i = 0; i < objects.Length; ++i)
+                {
+                    if (i == currentTask - 1)
+                    {
+                        objects[i].gameObject.SetActive(true);
+                        Window PLBase = objects[i].Find("PhotoLibraryExperiment");
+                        if (PLBase != null)
+                        {
+                            PhotoLibraryExperimentWindow PLWindow = GameObject.Instantiate(PLBase) as PhotoLibraryExperimentWindow;
+                            PLWindow.Open();
+                        }
+                    }
+                    else
+                    {
+                        objects[i].gameObject.SetActive(false);
+                    }
+                }
                 break;
 
             case "6":

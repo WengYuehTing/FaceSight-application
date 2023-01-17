@@ -8,7 +8,6 @@ public class ExperimentObject1 : ExperimentObject
     public HomeIcon[] targetIcons;
     public HomeWindow targetWindow;
     private int targetIndex = -1;
-    private float currentTime;
 
     [SerializeField] private List<int> remainIconIndex = new List<int> { 0, 1, 2, 3 };
 
@@ -96,7 +95,7 @@ public class ExperimentObject1 : ExperimentObject
                     window.Close();
                     targetIndex = -1;
                     print(timeSpent.ToString());
-                    client.Write(timeSpent.ToString());
+                    client.Write("1: " + timeSpent.ToString());
                 }
 
                 break;
