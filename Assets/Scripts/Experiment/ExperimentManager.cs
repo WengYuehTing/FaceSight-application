@@ -53,31 +53,6 @@ public class ExperimentManager : MonoBehaviour
             Push("5");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            Push("6");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-        {
-            Push("7");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            Push("8");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            Push("9");
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Push("h");
-        }
-
         if (Input.GetKeyDown(KeyCode.S))
         {
             Push("s");

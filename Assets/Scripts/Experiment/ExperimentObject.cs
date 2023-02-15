@@ -6,6 +6,7 @@ public class ExperimentObject : MonoBehaviour
 {
     public Window[] supportedApps;
     public string[] taskList;
+    public List<int> remainTasks = new List<int> { };
     protected AndroidClient client;
     protected Queue<string> actions;
     protected float currentTime;
@@ -15,6 +16,7 @@ public class ExperimentObject : MonoBehaviour
     {
         actions = new Queue<string>();
         client = GameObject.FindObjectOfType<AndroidClient>();
+
     }
 
     // Update is called once per frame
