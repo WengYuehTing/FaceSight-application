@@ -16,19 +16,13 @@ public class ApplicationManager : MonoBehaviour
     private bool isTappingWindow = false;
 
     public List<RenderTexture> renderTextures = new List<RenderTexture>();
-    
+    public ExperimentManager experiment;
+    private PhotoLibraryExperimentWindow plWindow;
 
     void Start()
     {
         actions = new Queue<string>();
-        //Invoke("test", 2.0f);
     }
-
-    public void test() {
-        Push("h");
-    }
-
-    
 
     // Update is called once per frame
     void Update()
@@ -117,7 +111,14 @@ public class ApplicationManager : MonoBehaviour
                 }
                 break;
 
-            case "c":  
+
+
+
+            case "c":
+                experiment.StartExperiment();
+                this.gameObject.SetActive(false);
+                break;
+
             case "phone":
                 Window pc = Find("PreContact");
                 if (pc != null)
@@ -184,10 +185,11 @@ public class ApplicationManager : MonoBehaviour
                 break;
 
             case "q":
-                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow!=null)
-                {
-                    Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow.Close();
-                }
+#if UNITY_EDITOR
+         UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
                 break;
 
             case "i":
@@ -202,10 +204,10 @@ public class ApplicationManager : MonoBehaviour
 
             case "p":
             case "open_photolibrary":
-                Window plp = Find("PhotoLibrary");
+                Window plp = Find("PhotoLibraryExperiment");
                 if (plp != null)
                 {
-                    PhotoLibraryWindow vpw = GameObject.Instantiate(plp) as PhotoLibraryWindow;
+                    PhotoLibraryExperimentWindow vpw = GameObject.Instantiate(plp) as PhotoLibraryExperimentWindow;
                     vpw.Open();
                 }
                 break;
@@ -228,6 +230,7 @@ public class ApplicationManager : MonoBehaviour
 
             case "nip":
             case "one finger":
+            case "right nose wing":
             case "rr":
             case "lr":
             case "ll":
@@ -258,9 +261,8 @@ public class ApplicationManager : MonoBehaviour
             default:
                 try
                 {
-                    if ((last_action.Contains("hand") || last_action == "swipe" || isConfirmation) && !isTappingWindow)
+                    if ((last_action.Contains("hand") || last_action.Contains("nose wing") || last_action == "swipe" || isConfirmation) && !isTappingWindow)
                     {
-                        
                         var decoded = action.Split(';');
                         var numberOfHand = int.Parse(decoded[0]);
                         var value = float.Parse(decoded[1]);
@@ -269,7 +271,7 @@ public class ApplicationManager : MonoBehaviour
                             break;
                         }
                         
-                        PhotoLibraryWindow plw = Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as PhotoLibraryWindow;
+                        PhotoLibraryExperimentWindow plw = Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as PhotoLibraryExperimentWindow;
 
                         swipeSequence.Add(value / 133.0F);
                         if (swipeSequence.Count > 2)
@@ -283,7 +285,7 @@ public class ApplicationManager : MonoBehaviour
                         }
                         else
                         {
-                            plw.Zoom(value / 50.0f);
+                            plw.Zoom(value / 90.0f);
                         }
 
                         numberOfSwiping++;

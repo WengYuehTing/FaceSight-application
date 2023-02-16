@@ -16,11 +16,24 @@ public class ExperimentObject3 : ExperimentObject
 
     }
 
+    public override string getCurrentTaskName(int taskId)
+    {
+        return "唤醒语音助手";
+    }
+
+    public override void prepare()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            remainTasks.Add(1);
+        }
+    }
+
     public override void Mapping(string action)
     {
         switch (action)
         {
-            case "c":
+            case "n":
             case "cover mouth":
                 Window voicePrefab = Find("VoiceAssistant");
                 if (voicePrefab != null)
@@ -29,7 +42,7 @@ public class ExperimentObject3 : ExperimentObject
                     {
                         VoiceWindow voiceWindow = GameObject.Instantiate(voicePrefab) as VoiceWindow;
                         voiceWindow.Open();
-                        client.Write("3: voice: " + (Time.time - currentTime).ToString());
+                        manager.FinishTask();
                     }
                 }
                 break;
@@ -48,7 +61,6 @@ public class ExperimentObject3 : ExperimentObject
 
             default:
                 break;
-
         }
     }
 

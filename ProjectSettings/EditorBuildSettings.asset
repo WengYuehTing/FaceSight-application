@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/NRSDK/Demos/Input-VirtualController.unity
     guid: 8438388fcd9d9714f81e1bea09d02c18
-  - enabled: 1
+  - enabled: 0
     path: Assets/OculusControllerExperiment.unity
     guid: afa6c9a9023c72144a75c1b7645323e8
+  - enabled: 0
+    path: Assets/FaceSightExperiment.unity
+    guid: ee441bf113a6d3043b5e178d61fedc21
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f6509933ab36da24c977d078f9b68bab,
       type: 2}

@@ -5,7 +5,8 @@ using System;
 using System.Net;
 using System.IO;
 using System.Net.Sockets;
-using System.Threading;  
+using System.Threading;
+using System.Net.NetworkInformation;
 
 public class AndroidClient : MonoBehaviour
 {
@@ -26,12 +27,23 @@ public class AndroidClient : MonoBehaviour
     {
         manager = GameObject.FindObjectOfType<ApplicationManager>();
         experiment = GameObject.FindObjectOfType<ExperimentManager>();
-        setupSocket();
+        SetupSocket();
     }
 
 
     void Update()
     {
+
+    }
+
+    public bool GetConnected()
+    {
+        if (tcpClient != null)
+        {
+            return tcpClient.Connected;
+        }
+
+        return false;
     }
 
     void OnApplicationQuit()
@@ -41,7 +53,7 @@ public class AndroidClient : MonoBehaviour
 
     // Helper methods for:
     //...setting up the communication
-    public void setupSocket()
+    public void SetupSocket()
     {
         
         try
@@ -92,7 +104,8 @@ public class AndroidClient : MonoBehaviour
                 }
                 if (experiment)
                 {
-                    experiment.Push(recv);
+                    if (experiment.isStartExperiment)
+                        experiment.Push(recv);
                 }
             } catch(Exception e) {
                 print(e.Message);

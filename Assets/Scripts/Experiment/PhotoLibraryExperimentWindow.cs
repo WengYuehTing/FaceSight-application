@@ -23,14 +23,18 @@ public class PhotoLibraryExperimentWindow : Window
     public float scrollValue = 1.0f;
     public float zoomValue = 2.0f;
 
+    public bool zoomEnabled = false;
+
+    public GameObject zoomingCube;
+    public bool isCurrentZoomUp = true;
 
     protected override void Awake()
     {
         base.Awake();
         visibility = true;
-        positionOffsets = new Vector3(0.0f, 0.0f, 0.0f);
         targetScale = new Vector3(2.0f, 2.0f, 2.0f);
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
+        positionOffsets = new Vector3(0.0f, 0.3f, 0.0f);
         selected = false;
     }
 
@@ -38,6 +42,7 @@ public class PhotoLibraryExperimentWindow : Window
     protected override void Start()
     {
         Setup();
+        zoomingCube = GameObject.Find("ZoomingCube");
     }
 
     private void Setup()
@@ -94,7 +99,16 @@ public class PhotoLibraryExperimentWindow : Window
 
     public void Scroll(float value)
     {
-        float target = Mathf.Clamp(scroller.normalizedPosition.y + value, 0.0f, 1.0f);
+        if (zoomEnabled)
+        {
+            return;
+        }
+
+        if (!scroller)
+        {
+            scroller = GetComponentInChildren<ScrollRect>();
+        }
+
         scrollValue += value;
         // float target = scrollValue + Mathf.Clamp(value, 0.0f, 1.0f);
         if (scrollValue >= 0.92f)
@@ -120,7 +134,8 @@ public class PhotoLibraryExperimentWindow : Window
         else if (scrollValue >= 0.07f)
         {
             scroller.normalizedPosition = new Vector2(0, 0.15f);
-        } else
+        }
+        else
         {
             scroller.normalizedPosition = new Vector2(0, 0.0f);
         }
@@ -139,8 +154,7 @@ public class PhotoLibraryExperimentWindow : Window
 
     public void Zoom(float value)
     {
-        print(value);
-        zoomValue = Mathf.Clamp(zoomValue + value, zoomMin, zoomMax); ;
+        zoomValue = Mathf.Clamp(zoomValue + value, zoomMin, zoomMax);
         this.gameObject.transform.localScale = new Vector3(zoomValue, zoomValue, 1.0f);
         /*
         float target = selectedImage.transform.localScale.x + value;
@@ -148,5 +162,43 @@ public class PhotoLibraryExperimentWindow : Window
         Vector3 desiredScale = new Vector3(target, target, 1.0f);
         selectedImage.transform.localScale = desiredScale;
         */
+    }
+
+    public void prepareZoom(float value)
+    {
+        zoomValue = Mathf.Clamp(zoomValue + value, zoomMin, zoomMax);
+        this.gameObject.transform.localScale = new Vector3(zoomValue, zoomValue, 1.0f);
+    }
+
+    public void StartZoom()
+    {
+        zoomEnabled = true;
+    }
+
+    public void StopZoom()
+    {
+        zoomEnabled = false;
+    }
+
+    public void ShowCube(bool isZoomUp)
+    {
+        zoomingCube.transform.position = transform.position;
+        zoomingCube.transform.eulerAngles = transform.eulerAngles;
+
+        if (isZoomUp)
+        {
+            zoomingCube.transform.localScale = new Vector3(17.81f, 11.13f, 0.013f);
+            zoomingCube.transform.Translate(0.0f, -5.0f, 0.1f);
+        }
+        else
+        {
+            zoomingCube.transform.localScale = new Vector3(12.22f, 7.49f, 0.013f);
+            zoomingCube.transform.Translate(0.0f, -3.4f, 0.1f);
+        }
+    }
+
+    public void HideCube()
+    {
+        zoomingCube.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
     }
 }

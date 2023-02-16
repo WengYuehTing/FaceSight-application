@@ -75,50 +75,60 @@ public class Attention : MonoBehaviour
 		if (Physics.Raycast(ray, out hit, 4000.0f))
 		{
 			hitPosition = hit.point;
-			GameObject target = hit.collider.transform.parent.gameObject;
-			if(target.GetComponent<Icon>()) {
-				if(hoveredIcon != null) {
-					hoveredIcon.Leave();
-					hoveredIcon = null;
-				}
-				hoveredIcon = target.GetComponent<Icon>(); 
-				hoveredWindow = hoveredIcon.parent;
-				if (pointer != null)
+			if (hit.collider.transform.parent)
+            {
+				GameObject target = hit.collider.transform.parent.gameObject;
+				if (target.GetComponent<Icon>())
 				{
-					pointer.Hit();
+					if (hoveredIcon != null)
+					{
+						hoveredIcon.Leave();
+						hoveredIcon = null;
+					}
+					hoveredIcon = target.GetComponent<Icon>();
+					hoveredWindow = hoveredIcon.parent;
+					if (pointer != null)
+					{
+						pointer.Hit();
+					}
+					hoveredIcon.Hover();
 				}
-				hoveredIcon.Hover();
-			} else if(target.GetComponent<Window>()) {
-				if(hoveredIcon != null) {
-					hoveredIcon.Leave();
-					hoveredIcon = null;
+				else if (target.GetComponent<Window>())
+				{
+					if (hoveredIcon != null)
+					{
+						hoveredIcon.Leave();
+						hoveredIcon = null;
+						if (pointer != null)
+						{
+							pointer.Normal();
+						}
+					}
+					hoveredWindow = target.GetComponent<Window>();
+				}
+
+				if (hit.collider.gameObject.GetComponent<InteractiveSlider>())
+				{
+					hoveredSlider = hit.collider.gameObject.GetComponent<InteractiveSlider>();
+				}
+				else
+				{
+					hoveredSlider = null;
+				}
+
+				if (hoveredSlider != null || hoveredIcon != null)
+				{
+					if (pointer != null)
+					{
+						pointer.Hit();
+					}
+				}
+				else
+				{
 					if (pointer != null)
 					{
 						pointer.Normal();
 					}
-				}
-				hoveredWindow = target.GetComponent<Window>(); 
-			} 
-
-			if(hit.collider.gameObject.GetComponent<InteractiveSlider>())
-            {
-				hoveredSlider = hit.collider.gameObject.GetComponent<InteractiveSlider>();
-			} else 
-            {
-				hoveredSlider = null;
-			}
-
-			if(hoveredSlider != null || hoveredIcon != null)
-            {
-				if (pointer != null)
-				{
-					pointer.Hit();
-				}
-			} else
-            {
-				if (pointer != null)
-				{
-					pointer.Normal();
 				}
 			}
 		}

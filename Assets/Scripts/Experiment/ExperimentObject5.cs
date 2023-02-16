@@ -28,12 +28,49 @@ public class ExperimentObject5 : ExperimentObject
 
         if (Input.GetKey("up"))
         {
-            Push("2;2.0");
+            Push("1;2.0");
         }
 
         if (Input.GetKey("down"))
         {
-            Push("2;-2.0");
+            Push("1;-2.0");
+        }
+    }
+
+    public override string getCurrentTaskName(int taskId)
+    {
+        switch (taskId)
+        {
+            case 1:
+                return "下滑找到第四张图";
+            case 2:
+                return "下滑找到第七张图";
+            case 3:
+                return "上滑找到第四张图";
+            case 4:
+                return "上滑找到第一张图";
+            case 5:
+                return "放大";
+            default:
+                return "缩小";
+        }
+    }
+
+    public override void prepare()
+    {
+        remainTasks.Add(1);
+        remainTasks.Add(2);
+        remainTasks.Add(3);
+        remainTasks.Add(4);
+
+        for (int i = 0; i < 2; i++)
+        {
+            remainTasks.Add(5);
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            remainTasks.Add(6);
         }
     }
 
@@ -41,6 +78,7 @@ public class ExperimentObject5 : ExperimentObject
     {
         switch (action)
         {
+            /*
             case "t":
             case "rr":
             case "right nose wing":
@@ -63,97 +101,118 @@ public class ExperimentObject5 : ExperimentObject
                 }
 
                 break;
-
+            */
             case "s":
-                currentTime = Time.time;
+                window = GameObject.FindObjectOfType<PhotoLibraryExperimentWindow>();
+                int taskId = getCurrentTask();
+                if (taskId == 1)
+                {
+                    window.Scroll(0.0f);
+                }
+                else if (taskId == 2)
+                {
+                    window.Scroll(-0.5f);
+                }
+                else if (taskId == 3)
+                {
+                    window.Scroll(-1.0f);
+                }
+                else if (taskId == 4)
+                {
+                    window.Scroll(-0.5f);
+                }
+                else if (taskId == 5)
+                {
+                    window.ShowCube(true);
+                }
+                else if (taskId == 6)
+                {
+                    window.ShowCube(false);
+                    window.prepareZoom(3.0f);
+                }
                 break;
 
-            case "r":
+            case "n":
             case "release":
-                if (currentStep <= 3)
+                window = GameObject.FindObjectOfType<PhotoLibraryExperimentWindow>();
+                if (remainTasks[0] == 1 && Mathf.Approximately(window.GetScrolledValue(), 0.49f))
                 {
-                    currentStep += 1;
+                    manager.FinishTask();
                 }
-                if (currentStep == 0 && Mathf.Approximately(window.GetScrolledValue(), 0.49f))
+                else if (remainTasks[0] == 2 && Mathf.Approximately(window.GetScrolledValue(), 0.0f))
                 {
-                    currentStep += 1;
-                    client.Write("5, 0, scroll: " + (Time.time - currentTime).ToString());
+                    manager.FinishTask();
                 }
-                else if (currentStep == 1 && Mathf.Approximately(window.GetScrolledValue(), 0.0f))
+                else if (remainTasks[0] == 3 && Mathf.Approximately(window.GetScrolledValue(), 0.49f))
                 {
-                    currentStep += 1;
-                    client.Write("5, 1, scroll: " + (Time.time - currentTime).ToString());
+                    manager.FinishTask();
                 }
-                else if (currentStep == 2 && Mathf.Approximately(window.GetScrolledValue(), 0.49f))
+                else if (remainTasks[0] == 4 && Mathf.Approximately(window.GetScrolledValue(), 1.0f))
                 {
-                    currentStep += 1;
-                    client.Write("5, 2, scroll: " + (Time.time - currentTime).ToString());
+                    manager.FinishTask();
                 }
-                else if (currentStep == 3 && Mathf.Approximately(window.GetScrolledValue(), 1.0f))
+                else if (remainTasks[0] == 5 && window.GetZoomValue() >= 2.8f)
                 {
-                    currentStep += 1;
-                    client.Write("5, 3, scroll: " + (Time.time - currentTime).ToString());
+                    manager.FinishTask();
                 }
-                else if (currentStep == 4 && Mathf.Approximately(window.GetZoomValue(), 3.0f))
+                else if (remainTasks[0] == 6 && window.GetZoomValue() <= 2.2f)
                 {
-                    currentStep += 1;
-                    client.Write("5, 4, zoom: " + (Time.time - currentTime).ToString());
-                }
-                else if (currentStep == 5 && Mathf.Approximately(window.GetZoomValue(), 2.0f))
-                {
-                    currentStep += 1;
-                    client.Write("5, 5, zoom: " + (Time.time - currentTime).ToString());
-                }
-                else if (currentStep == 6 && Mathf.Approximately(window.GetZoomValue(), 3.0f))
-                {
-                    currentStep += 1;
-                    client.Write("5, 6, zoom: " + (Time.time - currentTime).ToString());
-                }
-                else if (currentStep == 7 && Mathf.Approximately(window.GetZoomValue(), 2.0f))
-                {
-                    currentStep += 1;
-                    client.Write("5, 7, zoom: " + (Time.time - currentTime).ToString());
+                    manager.FinishTask();
                 }
                 break;
 
             default:
                 try
                 {
-                    /*
                     if ((last_action.Contains("hand") || last_action == "swipe" || isConfirmation) && !isTappingWindow)
                     {
-                        
-                    }
-                    */
-                    var decoded = action.Split(';');
-                    var numberOfHand = int.Parse(decoded[0]);
-                    var value = float.Parse(decoded[1]);
-                    if (Mathf.Abs(value) >= 100)
-                    {
-                        break;
-                    }
+                        var scrollValue = window.GetScrolledValue();
+                        var scrollRatio = 133.0f;
+                        if (remainTasks[0] == 1 && Mathf.Approximately(scrollValue, 0.49f))
+                        {
+                            scrollRatio *= 6;
+                        }
+                        else if (remainTasks[0] == 2 && Mathf.Approximately(scrollValue, 0.0f))
+                        {
+                            scrollRatio *= 6;
+                        }
+                        else if (remainTasks[0] == 3 && Mathf.Approximately(scrollValue, 0.49f))
+                        {
+                            scrollRatio *= 6;
+                        }
+                        else if (remainTasks[0] == 4 && Mathf.Approximately(scrollValue, 1.0f))
+                        {
+                            scrollRatio *= 6;
+                        }
 
-                    //PhotoLibraryExperimentWindow plw = Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as PhotoLibraryExperimentWindow;
+                        var decoded = action.Split(';');
+                        var numberOfHand = int.Parse(decoded[0]);
+                        var value = float.Parse(decoded[1]);
+                        if (Mathf.Abs(value) >= 100)
+                        {
+                            break;
+                        }
 
-                    swipeSequence.Add(value / 133.0F);
-                    if (swipeSequence.Count > 2)
-                    {
-                        swipeSequence.RemoveAt(0);
-                    }
+                        swipeSequence.Add(value / scrollRatio);
+                        if (swipeSequence.Count > 2)
+                        {
+                            swipeSequence.RemoveAt(0);
+                        }
 
-                    if (numberOfHand == 1)
-                    {
-                        window.Scroll(swipeSequence[0]);
-                    }
-                    else
-                    {
-                        window.Zoom(value / 10.0f);
-                    }
+                        if (numberOfHand == 1)
+                        {
+                            window.Scroll(swipeSequence[0]);
+                        }
+                        else
+                        {
+                            window.Zoom(value / 90.0f);
+                        }
 
-                    numberOfSwiping++;
-                    if (numberOfSwiping >= requiredForSwiping)
-                    {
-                        isConfirmation = false;
+                        numberOfSwiping++;
+                        if (numberOfSwiping >= requiredForSwiping)
+                        {
+                            isConfirmation = false;
+                        }
                     }
                 }
                 catch

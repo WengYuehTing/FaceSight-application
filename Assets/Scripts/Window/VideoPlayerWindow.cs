@@ -182,7 +182,7 @@ public class VideoPlayerWindow : Window
         }
 
         var info = Resources.LoadAll(PACKAGE_NAME + "/Video", typeof(VideoClip));
-        
+        print(index);
         videoPlayer.clip = info[index] as VideoClip;
         int num = GameObject.FindObjectsOfType<VideoPlayerWindow>().Length;
         if (GameObject.FindObjectOfType<ApplicationManager>())

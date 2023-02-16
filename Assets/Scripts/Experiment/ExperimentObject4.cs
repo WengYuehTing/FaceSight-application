@@ -13,13 +13,37 @@ public class ExperimentObject4 : ExperimentObject
     protected override void Update()
     {
         base.Update();
+    }
 
+    public override void prepare()
+    {
+        remainTasks.Add(1);
+        remainTasks.Add(2);
+        remainTasks.Add(3);
+        remainTasks.Add(4);
+    }
+
+    public override string getCurrentTaskName(int taskId)
+    {
+        switch (taskId)
+        {
+            case 1:
+                return "打给张如意";
+            case 2:
+                return "打给孙漂亮";
+            case 3:
+                return "打给薇薇";
+            default:
+                return "打给梁老板";
+        }
     }
 
     public override void Mapping(string action)
     {
         if (action.StartsWith("speech_result:"))
         {
+            manager.FinishTask();
+            /*
             string userSpeech = action.Split(':')[1];
             if (Find("PreContact") != null)
             {
@@ -34,17 +58,17 @@ public class ExperimentObject4 : ExperimentObject
                         ContactsWindow cw = GameObject.Instantiate(contact) as ContactsWindow;
                         cw.Open();
                         cw.Make(userSpeech);
-                        client.Write("4: phone: " + (Time.time - currentTime).ToString());
                     }
                 }
 
             }
+            */
             return;
         }
 
         switch (action)
         {
-            case "c":
+            case "n":
             case "phone":
                 Window pc = Find("PreContact");
                 if (pc != null)
