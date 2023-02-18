@@ -1,0 +1,14 @@
+diff a/ProjectSettings/EditorBuildSettings.asset b/ProjectSettings/EditorBuildSettings.asset	(rejected hunks)
+@@ -14,4 +14,11 @@
+   - enabled: 0
+     path: Assets/NRSDK/Demos/Input-VirtualController.unity
+     guid: 8438388fcd9d9714f81e1bea09d02c18
+-  m_configObjects: {}
++  - enabled: 1
++    path: Assets/OculusControllerExperiment.unity
++    guid: afa6c9a9023c72144a75c1b7645323e8
++  m_configObjects:
++    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f6509933ab36da24c977d078f9b68bab,
++      type: 2}
++    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 59073ac4e9f10394f9ee0c4fe875d4ce,
++      type: 2}

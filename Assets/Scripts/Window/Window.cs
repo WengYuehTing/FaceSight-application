@@ -97,7 +97,7 @@ public class Window : MonoBehaviour, WindowBase
         float curveAmount = curve.Evaluate(curveTime);
         
         visibility = true;
-                eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
+        eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
         position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition() + positionOffsets;
         //eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
         transform.LookAt(Camera.main.transform);

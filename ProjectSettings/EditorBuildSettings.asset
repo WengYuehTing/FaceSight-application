@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/FaceSightDemo.unity
     guid: 11051bb86ffad58418de983a985d207a
   - enabled: 0
@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/OculusControllerExperiment.unity
     guid: afa6c9a9023c72144a75c1b7645323e8
-  - enabled: 0
+  - enabled: 1
     path: Assets/FaceSightExperiment.unity
     guid: ee441bf113a6d3043b5e178d61fedc21
   m_configObjects:

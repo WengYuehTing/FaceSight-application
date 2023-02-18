@@ -30,6 +30,8 @@ public class ExperimentManager : MonoBehaviour
     public Window[] supportedApps;
     public ExperimentObject[] objects;
     public List<RenderTexture> renderTextures = new List<RenderTexture>();
+
+    public AndroidClient client;
     public NetworkManager network;
 
 
@@ -39,8 +41,8 @@ public class ExperimentManager : MonoBehaviour
     };
 
     public bool isStartExperiment = false;
-    [SerializeField] private int currentTask;
-    [SerializeField] private int currentTaskId;
+    public int currentTask;
+    public int currentTaskId;
     [SerializeField] private List<int> remainTasks = new List<int> { };
     public TaskState state = TaskState.Finish;
     public bool isStartingTask = false;
@@ -120,6 +122,11 @@ public class ExperimentManager : MonoBehaviour
             string action = actions.Dequeue();
             Mapping(action);
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Push("f");
+        }
         /*
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -131,10 +138,7 @@ public class ExperimentManager : MonoBehaviour
             Push("s");
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Push("f");
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -185,10 +189,14 @@ public class ExperimentManager : MonoBehaviour
                         HintWindow win1 = GameObject.FindObjectOfType<HintWindow>();
                         if (win1)
                         {
-                            int taskId = objects[i].getCurrentTask();
-                            currentTaskId = taskId;
-                            win1.ChangeName(objects[i].getCurrentTaskName(taskId));
-                            network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            win1.ChangeName(objects[i].getCurrentTaskName(currentTaskId));
+                            if (network == null)
+                            {
+                                client.Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            } else
+                            {
+                                network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
                         }
                     }
                     else
@@ -197,7 +205,7 @@ public class ExperimentManager : MonoBehaviour
                     }
                 }
                 break;
-
+        
             case "2":
                 currentTask = 2;
                 for (int i = 0; i < objects.Length; ++i)
@@ -209,10 +217,15 @@ public class ExperimentManager : MonoBehaviour
                         HintWindow win2 = GameObject.FindObjectOfType<HintWindow>();
                         if (win2)
                         {
-                            int taskId = objects[i].getCurrentTask();
-                            currentTaskId = taskId;
-                            win2.ChangeName(objects[i].getCurrentTaskName(taskId));
-                            network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            win2.ChangeName(objects[i].getCurrentTaskName(currentTaskId));
+                            if (network == null)
+                            {
+                                client.Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
+                            else
+                            {
+                                network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
                         }
 
                         Window VPBase = objects[i].Find("VideoPlayer");
@@ -242,7 +255,14 @@ public class ExperimentManager : MonoBehaviour
                             int taskId = objects[i].getCurrentTask();
                             currentTaskId = taskId;
                             win3.ChangeName(objects[i].getCurrentTaskName(taskId));
-                            network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            if (network == null)
+                            {
+                                client.Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
+                            else
+                            {
+                                network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
                         }
                     }
                     else
@@ -262,10 +282,15 @@ public class ExperimentManager : MonoBehaviour
                         HintWindow win4 = GameObject.FindObjectOfType<HintWindow>();
                         if (win4)
                         {
-                            int taskId = objects[i].getCurrentTask();
-                            currentTaskId = taskId;
-                            win4.ChangeName(objects[i].getCurrentTaskName(taskId));
-                            network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            win4.ChangeName(objects[i].getCurrentTaskName(currentTaskId));
+                            if (network == null)
+                            {
+                                client.Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
+                            else
+                            {
+                                network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
                         }
                     }
                     else
@@ -281,14 +306,18 @@ public class ExperimentManager : MonoBehaviour
                 {
                     if (i == currentTask - 1)
                     {
-                        objects[i].gameObject.SetActive(true);
                         HintWindow win5 = GameObject.FindObjectOfType<HintWindow>();
                         if (win5)
                         {
-                            int taskId = objects[i].getCurrentTask();
-                            currentTaskId = taskId;
-                            win5.ChangeName(objects[i].getCurrentTaskName(taskId));
-                            network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            win5.ChangeName(objects[i].getCurrentTaskName(currentTaskId));
+                            if (network == null)
+                            {
+                                client.Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
+                            else
+                            {
+                                network.GetCurrentClient().Write(currentTask.ToString() + "," + currentTaskId.ToString());
+                            }
                         }
                         Window PLBase = objects[i].Find("PhotoLibraryExperiment");
                         if (PLBase != null)
@@ -352,17 +381,50 @@ public class ExperimentManager : MonoBehaviour
                 FinishTask();
                 break;
 
-            default:
+            case "q":
+#if UNITY_EDITOR
+         UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+                break;
 
+            default:
                 if (action == "s")
                 {
                     StartTask();
                 }
 
-                print(action);
-                if (currentTask > 0 && currentTask < 6 && objects[currentTask - 1].gameObject)
+                if (action.Contains(","))
                 {
-                    objects[currentTask - 1].Push(action);
+                    if (state != TaskState.Finish)
+                    {
+                        break;
+                    }
+                    state = TaskState.Show;
+                    var array = action.Split(',');
+                    currentTask = int.Parse(array[0]);
+                    currentTaskId = int.Parse(array[1]);
+                    Push(currentTask.ToString());
+                    Window hintWin = Find("Hint");
+                    if (hintWin != null)
+                    {
+                        HintWindow hw = GameObject.Instantiate(hintWin) as HintWindow;
+                        hw.Open();
+                        hintWindow = hw;
+                        timeRemaining = timeRequired;
+                        timerIsCounting = true;
+                    }
+                    break;
+                }
+
+                if (currentTask > 0 && currentTask < 6 && objects[currentTask - 1].gameObject)
+                {   
+                    if (state == TaskState.Start)
+                    {
+                        objects[currentTask - 1].Push(action);
+                    }
+
                 }
                 break;
 
@@ -371,8 +433,18 @@ public class ExperimentManager : MonoBehaviour
 
     public void StartExperiment()
     {
+        foreach (Window obj in GameObject.FindObjectsOfType<Window>())
+        {
+            if (obj is PhotoLibraryExperimentWindow)
+            {
+                (obj as PhotoLibraryExperimentWindow).HideCube();
+            }
+
+            Destroy(obj.gameObject);
+        }
+
         isStartExperiment = true;
-        Push("c");
+        //Push("c");
     }
 
     public float taskStartTime = 0.0f;
@@ -399,7 +471,14 @@ public class ExperimentManager : MonoBehaviour
         float timeExecute = Time.time - taskStartTime;
         string result = string.Format("{0},{1},{2},0", currentTask, currentTaskId, timeExecute);
         print(result);
-        network.GetCurrentClient().Write(result);
+        if (network == null)
+        {
+            client.Write(result);
+        }
+        else
+        {
+            network.GetCurrentClient().Write(result);
+        }
         foreach (Window obj in GameObject.FindObjectsOfType<Window>())
         {
             if (obj is PhotoLibraryExperimentWindow)
@@ -410,7 +489,7 @@ public class ExperimentManager : MonoBehaviour
             Destroy(obj.gameObject);
         }
 
-        Push("c");
+        //Push("c");
     }
 
     public void Push(string action)

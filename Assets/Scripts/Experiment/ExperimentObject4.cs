@@ -78,6 +78,21 @@ public class ExperimentObject4 : ExperimentObject
                 }
                 break;
 
+            /*
+            case "none":
+                var rand = Random.Range(0, 4);
+                if (rand > 0)
+                {
+                    Window pc2 = Find("PreContact");
+                    if (pc2 != null)
+                    {
+                        PreContactsWindow pcw = GameObject.Instantiate(pc2) as PreContactsWindow;
+                        pcw.Open();
+                    }
+                }
+                break;
+            */
+
             case "s":
                 currentTime = Time.time;
                 break;

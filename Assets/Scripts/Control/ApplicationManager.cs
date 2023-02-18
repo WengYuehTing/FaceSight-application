@@ -19,9 +19,14 @@ public class ApplicationManager : MonoBehaviour
     public ExperimentManager experiment;
     private PhotoLibraryExperimentWindow plWindow;
 
+    public AudioSource beep;
+
+    public int continueMode = 0;
+
     void Start()
     {
         actions = new Queue<string>();
+        beep = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,6 +55,31 @@ public class ApplicationManager : MonoBehaviour
         return null;
     }
 
+    private void Tapping()
+    {
+        isConfirmation = true;
+        Attention attention = Camera.main.transform.parent.GetComponent<Attention>();
+        if (attention.hoveredIcon != null)
+        {
+            if (!(attention.hoveredIcon is PhotoLibraryImageIcon))
+            {
+                attention.hoveredIcon.Activate();
+            }
+        }
+        else if (attention.hoveredSlider != null)
+        {
+            attention.hoveredSlider.OnTapped(attention.hitPosition);
+        }
+        else if (attention.hoveredWindow != null)
+        {
+            int code = attention.hoveredWindow.OnTapped();
+            if (code == 1)
+            {
+                isTappingWindow = true;
+            }
+        }
+    }
+
     public void Mapping(string action) {
         if (action.StartsWith("speech_result:"))
         {
@@ -74,10 +104,23 @@ public class ApplicationManager : MonoBehaviour
             return;
         }
 
-        switch(action) {
+        var hoverWindow = Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow;
+        var hoverIcon = Camera.main.transform.parent.GetComponent<Attention>().hoveredIcon;
+
+        switch (action) {
+            case "0":
+                continueMode = 0;
+                break;
+            case "1":
+                continueMode = 1;
+                break;
+            case "2":
+                continueMode = 2;
+                break;
+
             case "gentle push left nose wing":
-                if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortBackward();
+                if(hoverWindow as VideoPlayerWindow) {
+                    (hoverWindow as VideoPlayerWindow).ShortBackward();
                 }
                 break;
             
@@ -111,21 +154,48 @@ public class ApplicationManager : MonoBehaviour
                 }
                 break;
 
-
-
-
-            case "c":
+            case "s":
                 experiment.StartExperiment();
                 this.gameObject.SetActive(false);
                 break;
 
-            case "phone":
-                Window pc = Find("PreContact");
-                if (pc != null)
+            case "none":
+                if (hoverWindow as VideoPlayerWindow)
                 {
-                    PreContactsWindow pcw = GameObject.Instantiate(pc) as PreContactsWindow;
-                    pcw.Open();
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Mute();
                 }
+
+                if (hoverIcon)
+                {
+                    Tapping();
+                }
+                break;
+
+            case "phone":
+                if (!hoverWindow)
+                {
+                    Window pc = Find("PreContact");
+                    if (pc != null)
+                    {
+                        PreContactsWindow pcw = GameObject.Instantiate(pc) as PreContactsWindow;
+                        pcw.Open();
+                    }
+                }
+                else if (hoverWindow as PhotoLibraryExperimentWindow)
+                {
+                    if (hoverIcon && hoverIcon.gameObject.name == "Close Background")
+                    {
+                        Tapping();
+                    }
+                    else
+                    {
+                        beep.Play();
+                    }
+                } else
+                {
+                    Tapping();
+                }
+
                 break;
                 /*
                 Window contactsPrefab = Find("Contacts");
@@ -147,18 +217,21 @@ public class ApplicationManager : MonoBehaviour
 
             case "v":
             case "cover mouth":
-                Window voicePrefab = Find("VoiceAssistant");
-                if (voicePrefab != null)
+                if (!hoverWindow)
                 {
-                    if (GameObject.FindObjectOfType<VoiceWindow>() != null)
+                    Window voicePrefab = Find("VoiceAssistant");
+                    if (voicePrefab != null)
                     {
-                        VoiceWindow voiceWindow = GameObject.FindObjectOfType<VoiceWindow>();
-                        voiceWindow.Close();
-                    }
-                    else
-                    {
-                        VoiceWindow voiceWindow = GameObject.Instantiate(voicePrefab) as VoiceWindow;
-                        voiceWindow.Open();
+                        if (GameObject.FindObjectOfType<VoiceWindow>() != null)
+                        {
+                            VoiceWindow voiceWindow = GameObject.FindObjectOfType<VoiceWindow>();
+                            voiceWindow.Close();
+                        }
+                        else
+                        {
+                            VoiceWindow voiceWindow = GameObject.Instantiate(voicePrefab) as VoiceWindow;
+                            voiceWindow.Open();
+                        }
                     }
                 }
                 break;
@@ -184,14 +257,6 @@ public class ApplicationManager : MonoBehaviour
                 isTappingWindow = false;
                 break;
 
-            case "q":
-#if UNITY_EDITOR
-         UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-                break;
-
             case "i":
             case "open_videoplayer":
                 Window vpp = Find("VideoPlayer");
@@ -214,19 +279,35 @@ public class ApplicationManager : MonoBehaviour
 
             case "h":
             case "grip":
-                Window prefab = Find("Home");
-                if(prefab != null) {
-                    if(GameObject.FindObjectOfType<HomeWindow>() != null) {
-                        Window window = GameObject.FindObjectOfType<Window>();
-                        window.Close();
-                    } else {
-                        Window window = GameObject.Instantiate(prefab) as Window;
-                        window.Open();
+                if (!hoverWindow)
+                {
+                    Window prefab = Find("Home");
+                    if (prefab != null)
+                    {
+                        if (GameObject.FindObjectOfType<HomeWindow>() != null)
+                        {
+                            Window window = GameObject.FindObjectOfType<Window>();
+                            window.Close();
+                        }
+                        else
+                        {
+                            Window window = GameObject.Instantiate(prefab) as Window;
+                            window.Open();
+                        }
                     }
+                } else if (hoverWindow as HomeWindow)
+                {
+                    Tapping();
                 }
+                
                 break;
 
-
+            case "two hands":
+                if (hoverWindow as PhotoLibraryExperimentWindow)
+                {
+                    beep.Play();
+                }
+                break;
 
             case "nip":
             case "one finger":
@@ -236,26 +317,20 @@ public class ApplicationManager : MonoBehaviour
             case "ll":
             case "rl":
             case "t":
-                isConfirmation = true;
-                Attention attention = Camera.main.transform.parent.GetComponent<Attention>();
-                if (attention.hoveredIcon != null) {
-                    if(!(attention.hoveredIcon is PhotoLibraryImageIcon))
-                    {
-                        attention.hoveredIcon.Activate();
-                    }
-                }
-                else if (attention.hoveredSlider != null)
+                if (hoverWindow is PhotoLibraryExperimentWindow)
                 {
-                    attention.hoveredSlider.OnTapped(attention.hitPosition);
-                }
-                else if (attention.hoveredWindow != null) {
-                    int code = attention.hoveredWindow.OnTapped();
-                    if(code == 1)
+                    if (hoverIcon && hoverIcon.gameObject.name == "Close Background")
                     {
-                        isTappingWindow = true;
+                        Tapping();
                     }
+                    else
+                    {
+                        beep.Play();
+                    }
+                } else
+                {
+                    Tapping();
                 }
-
                 break;
 
             default:
@@ -279,7 +354,18 @@ public class ApplicationManager : MonoBehaviour
                             swipeSequence.RemoveAt(0);
                         }
 
-                        if (numberOfHand == 1)
+                        if (continueMode == 0)
+                        {
+                            if (numberOfHand == 1)
+                            {
+                                plw.Scroll(swipeSequence[0]);
+                            }
+                            else
+                            {
+                                plw.Zoom(value / 90.0f);
+                            }
+                        }
+                        else if (continueMode == 1)
                         {
                             plw.Scroll(swipeSequence[0]);
                         }
@@ -287,6 +373,7 @@ public class ApplicationManager : MonoBehaviour
                         {
                             plw.Zoom(value / 90.0f);
                         }
+
 
                         numberOfSwiping++;
                         if (numberOfSwiping >= requiredForSwiping)

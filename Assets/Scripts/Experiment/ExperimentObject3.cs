@@ -34,17 +34,9 @@ public class ExperimentObject3 : ExperimentObject
         switch (action)
         {
             case "n":
+            case "none":
             case "cover mouth":
-                Window voicePrefab = Find("VoiceAssistant");
-                if (voicePrefab != null)
-                {
-                    if (GameObject.FindObjectOfType<VoiceWindow>() == null)
-                    {
-                        VoiceWindow voiceWindow = GameObject.Instantiate(voicePrefab) as VoiceWindow;
-                        voiceWindow.Open();
-                        manager.FinishTask();
-                    }
-                }
+                manager.FinishTask();
                 break;
 
             case "s":

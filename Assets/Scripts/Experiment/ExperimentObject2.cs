@@ -70,6 +70,8 @@ public class ExperimentObject2 : ExperimentObject
 
     public override void Mapping(string action)
     {
+        int taskId = manager.currentTaskId;
+        print(taskId);
         switch (action)
         {
             case "x":
@@ -77,14 +79,14 @@ public class ExperimentObject2 : ExperimentObject
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
                     (attention.hoveredWindow as VideoPlayerWindow).ShortBackward();
-                    if (remainTasks[0] == 2)
+                    if (taskId == 2)
                     {
                         manager.FinishTask();
                     }
-                    else if (remainTasks[0] == 4)
+                    else if (taskId == 4)
                     {
-                        var rand = Random.Range(0, 2);
-                        if (rand == 0)
+                        var rand = Random.Range(0, 4);
+                        if (rand > 0)
                         {
                             manager.FinishTask();
                         }
@@ -93,18 +95,19 @@ public class ExperimentObject2 : ExperimentObject
                 break;
 
             case "v":
+            case "phone":
             case "gentle push right nose wing":
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
                     (attention.hoveredWindow as VideoPlayerWindow).ShortForward();
-                    if (remainTasks[0] == 3)
+                    if (taskId == 3)
                     {
                         manager.FinishTask();
                     }
-                    else if (remainTasks[0] == 5)
+                    else if (taskId == 5)
                     {
-                        var rand = Random.Range(0, 2);
-                        if (rand == 0)
+                        var rand = Random.Range(0, 4);
+                        if (rand > 0)
                         {
                             manager.FinishTask();
                         }
@@ -117,8 +120,11 @@ public class ExperimentObject2 : ExperimentObject
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
                     (attention.hoveredWindow as VideoPlayerWindow).Play_OR_Pause();
-                    if (remainTasks[0] == 1)
+                    if (taskId == 1)
+                    {
                         manager.FinishTask();
+                        print(taskId);
+                    }
                 }
                 break;
 
@@ -127,8 +133,18 @@ public class ExperimentObject2 : ExperimentObject
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
                     (attention.hoveredWindow as VideoPlayerWindow).Next();
-                    if (remainTasks[0] == 5)
+                    if (taskId == 5)
+                    {
                         manager.FinishTask();
+                    } 
+                    else if (taskId == 3)
+                    {
+                        var rand = Random.Range(0, 4);
+                        if (rand > 0)
+                        {
+                            manager.FinishTask();
+                        }
+                    }
                 }
                 break;
 
@@ -137,9 +153,17 @@ public class ExperimentObject2 : ExperimentObject
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
                     (attention.hoveredWindow as VideoPlayerWindow).Last();
-                    if (remainTasks[0] == 4)
+                    if (taskId == 4)
                     {
                         manager.FinishTask();
+                    }
+                    else if (taskId == 2)
+                    {
+                        var rand = Random.Range(0, 4);
+                        if (rand > 0)
+                        {
+                            manager.FinishTask();
+                        }
                     }
                 }
                 break;
@@ -151,19 +175,18 @@ public class ExperimentObject2 : ExperimentObject
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
                     (attention.hoveredWindow as VideoPlayerWindow).Mute();
-                    if (remainTasks[0] == 6)
+                    if (taskId == 6)
+                    {
                         manager.FinishTask();
+                    }
                 }
                 break;
 
             case "none":
-                var rand2 = Random.Range(0, 2);
-                if (rand2 == 0)
+                var rand2 = Random.Range(0, 4);
+                if (rand2 > 0)
                 {
-                    if (remainTasks[0] == 6 || remainTasks[0] == 1)
-                    {
-                        manager.FinishTask();
-                    }
+                    manager.FinishTask();
                 }
                 break;
 

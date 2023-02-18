@@ -62,9 +62,12 @@ public class VideoPlayerWindow : Window
     protected override void Awake() {
         base.Awake();
         visibility = true;
-        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f);
-        targetScale = new Vector3(2.0f, 2.0f, 1.0f);
+        positionOffsets = new Vector3(0.0f, -2.0f, 0.0f);
+        targetScale = new Vector3(1.5f, 1.5f, 1.0f);
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
+#if UNITY_EDITOR
+        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f); // 
+#endif
         shortSeconds = 15.0f;
         longSeconds = 60.0f;
         volume = 20.0f;

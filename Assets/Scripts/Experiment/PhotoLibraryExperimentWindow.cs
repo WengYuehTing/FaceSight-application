@@ -21,7 +21,7 @@ public class PhotoLibraryExperimentWindow : Window
     protected float zoomMax;
     protected float zoomMin;
     public float scrollValue = 1.0f;
-    public float zoomValue = 2.0f;
+    public float zoomValue = 1.2f;
 
     public bool zoomEnabled = false;
 
@@ -32,9 +32,12 @@ public class PhotoLibraryExperimentWindow : Window
     {
         base.Awake();
         visibility = true;
-        targetScale = new Vector3(2.0f, 2.0f, 2.0f);
+        targetScale = new Vector3(1.2f, 1.2f, 1.0f);
         eulerAngleOffsets = new Vector3(0.0f, 180.0f, 0.0f);
-        positionOffsets = new Vector3(0.0f, 0.3f, 0.0f);
+        positionOffsets = new Vector3(0.0f, -2.0f, 0.0f);
+#if UNITY_EDITOR
+        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f); // 
+#endif
         selected = false;
     }
 
@@ -50,8 +53,9 @@ public class PhotoLibraryExperimentWindow : Window
         scroller = GetComponentInChildren<ScrollRect>();
         sliderMax = 0.2f;
         sliderMin = -0.4f;
-        zoomMax = 3.0f;
-        zoomMin = 2.0f;
+        zoomMax = 1.8f;
+        zoomMin = 1.2f;
+        zoomValue = 1.2f;
     }
 
     // Update is called once per frame
@@ -109,7 +113,8 @@ public class PhotoLibraryExperimentWindow : Window
             scroller = GetComponentInChildren<ScrollRect>();
         }
 
-        scrollValue += value;
+
+        scrollValue = Mathf.Clamp(scrollValue + value, 0.0f, 1.0f);
         // float target = scrollValue + Mathf.Clamp(value, 0.0f, 1.0f);
         if (scrollValue >= 0.92f)
         {
@@ -187,13 +192,13 @@ public class PhotoLibraryExperimentWindow : Window
 
         if (isZoomUp)
         {
-            zoomingCube.transform.localScale = new Vector3(17.81f, 11.13f, 0.013f);
-            zoomingCube.transform.Translate(0.0f, -5.0f, 0.1f);
+            zoomingCube.transform.localScale = new Vector3(10.68f, 6.78f, 0.013f);
+            zoomingCube.transform.Translate(0.0f, -3.0f, 0.1f);
         }
         else
         {
-            zoomingCube.transform.localScale = new Vector3(12.22f, 7.49f, 0.013f);
-            zoomingCube.transform.Translate(0.0f, -3.4f, 0.1f);
+            zoomingCube.transform.localScale = new Vector3(7.33f, 4.49f, 0.013f);
+            zoomingCube.transform.Translate(0.0f, -2.2f, 0.1f);
         }
     }
 

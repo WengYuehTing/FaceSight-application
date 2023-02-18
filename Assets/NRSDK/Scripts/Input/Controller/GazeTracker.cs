@@ -59,7 +59,7 @@ namespace NRKernal
                 transform.position = CameraCenter.position;
                 transform.rotation = CameraCenter.rotation;
             }
-            print(CameraCenter.transform.position);
+            //print(CameraCenter.transform.position);
         }
     }
     /// @endcond

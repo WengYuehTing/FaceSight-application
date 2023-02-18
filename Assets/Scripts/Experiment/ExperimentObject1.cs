@@ -49,6 +49,7 @@ public class ExperimentObject1 : ExperimentObject
 
     public override void Mapping(string action)
     {
+        int taskId = manager.currentTaskId;
         switch (action)
         {
             case "t":
@@ -56,26 +57,27 @@ public class ExperimentObject1 : ExperimentObject
             case "lr":
             case "rl":
             case "ll":
+            case "phone":
             case "right nose wing":
                 if (attention.hoveredIcon)
                 {
                     string iconName = attention.hoveredIcon.gameObject.name;
-                    if (remainTasks[0] == 1 && iconName == "VideoPlayerIcon")
+                    if (taskId == 1 && iconName == "VideoPlayerIcon")
                     {
                         manager.FinishTask();
                     }
 
-                    else if (remainTasks[0] == 2 && iconName == "PhotoLibraryIcon")
+                    else if (taskId == 2 && iconName == "PhotoLibraryIcon")
                     {
                         manager.FinishTask();
                     }
 
-                    else if (remainTasks[0] == 3 && iconName == "ContactsIcon")
+                    else if (taskId == 3 && iconName == "ContactsIcon")
                     {
                         manager.FinishTask();
                     }
 
-                    else if (remainTasks[0] == 4 && iconName == "VoiceAssistent")
+                    else if (taskId == 4 && iconName == "VoiceAssistent")
                     {
                         manager.FinishTask();
                     }
@@ -91,24 +93,40 @@ public class ExperimentObject1 : ExperimentObject
                     if (attention.hoveredIcon)
                     {
                         string iconName = attention.hoveredIcon.gameObject.name;
-                        if (remainTasks[0] == 1 && iconName == "VideoPlayerIcon")
+                        if (taskId == 1 && iconName == "VideoPlayerIcon")
                         {
                             manager.FinishTask();
                         }
 
-                        else if (remainTasks[0] == 2 && iconName == "PhotoLibraryIcon")
+                        else if (taskId == 2 && iconName == "PhotoLibraryIcon")
                         {
                             manager.FinishTask();
                         }
 
-                        else if (remainTasks[0] == 3 && iconName == "ContactsIcon")
+                        else if (taskId == 3 && iconName == "ContactsIcon")
                         {
                             manager.FinishTask();
                         }
 
-                        else if (remainTasks[0] == 4 && iconName == "VoiceAssistent")
+                        else if (taskId == 4 && iconName == "VoiceAssistent")
                         {
                             manager.FinishTask();
+                        }
+                    } else
+                    {
+                        Window prefab = Find("Home");
+                        if (prefab != null)
+                        {
+                            if (GameObject.FindObjectOfType<HomeWindow>() != null)
+                            {
+                                Window window = GameObject.FindObjectOfType<Window>();
+                                window.Close();
+                            }
+                            else
+                            {
+                                Window window = GameObject.Instantiate(prefab) as Window;
+                                window.Open();
+                            }
                         }
                     }
                 }
@@ -119,22 +137,22 @@ public class ExperimentObject1 : ExperimentObject
                 if (attention.hoveredIcon)
                 {
                     string iconName = attention.hoveredIcon.gameObject.name;
-                    if (remainTasks[0] == 1 && iconName == "VideoPlayerIcon")
+                    if (taskId == 1 && iconName == "VideoPlayerIcon")
                     {
                         manager.FinishTask();
                     }
 
-                    else if (remainTasks[0] == 2 && iconName == "PhotoLibraryIcon")
+                    else if (taskId == 2 && iconName == "PhotoLibraryIcon")
                     {
                         manager.FinishTask();
                     }
 
-                    else if (remainTasks[0] == 3 && iconName == "ContactsIcon")
+                    else if (taskId == 3 && iconName == "ContactsIcon")
                     {
                         manager.FinishTask();
                     }
 
-                    else if (remainTasks[0] == 4 && iconName == "VoiceAssistent")
+                    else if (taskId == 4 && iconName == "VoiceAssistent")
                     {
                         manager.FinishTask();
                     }

@@ -9,10 +9,13 @@ public class HomeWindow : Window
     // Keep initializing code on Awake insteaf of Start. 
     protected override void Awake() {
         base.Awake();
-        targetScale = new Vector3(6.0f, 7.0f, 1.0f);
-        positionOffsets = new Vector3(0.0f, 0.0f, 0.0f);
+        targetScale = new Vector3(4.8f, 5.6f, 1.0f);
+        positionOffsets = new Vector3(0.0f, -4.0f, 0.0f);
         eulerAngleOffsets = new Vector3(0.0f, 0.0f, 0.0f);
         visibility = true;
+#if UNITY_EDITOR
+        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f); // 
+#endif
     }
     protected override void Start()
     {
