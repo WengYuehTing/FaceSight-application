@@ -78,14 +78,14 @@ public class ExperimentObject2 : ExperimentObject
             case "gentle push left nose wing":
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
-                    (attention.hoveredWindow as VideoPlayerWindow).ShortBackward();
-                    if (taskId == 2)
+                    (attention.hoveredWindow as VideoPlayerWindow).ShortForward();
+                    if (taskId == 3)
                     {
                         manager.FinishTask();
                     }
-                    else if (taskId == 4)
+                    else if (taskId == 5)
                     {
-                        var rand = Random.Range(0, 4);
+                        var rand = Random.Range(0, 2);
                         if (rand > 0)
                         {
                             manager.FinishTask();
@@ -99,14 +99,14 @@ public class ExperimentObject2 : ExperimentObject
             case "gentle push right nose wing":
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
-                    (attention.hoveredWindow as VideoPlayerWindow).ShortForward();
-                    if (taskId == 3)
+                    (attention.hoveredWindow as VideoPlayerWindow).ShortBackward();
+                    if (taskId == 2)
                     {
                         manager.FinishTask();
                     }
-                    else if (taskId == 5)
+                    else if (taskId == 4)
                     {
-                        var rand = Random.Range(0, 4);
+                        var rand = Random.Range(0, 2);
                         if (rand > 0)
                         {
                             manager.FinishTask();
@@ -132,14 +132,14 @@ public class ExperimentObject2 : ExperimentObject
             case "rude push right nose wing":
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
-                    (attention.hoveredWindow as VideoPlayerWindow).Next();
-                    if (taskId == 5)
+                    (attention.hoveredWindow as VideoPlayerWindow).Last();
+                    if (taskId == 4)
                     {
                         manager.FinishTask();
                     } 
-                    else if (taskId == 3)
+                    else if (taskId == 2)
                     {
-                        var rand = Random.Range(0, 4);
+                        var rand = Random.Range(0, 2);
                         if (rand > 0)
                         {
                             manager.FinishTask();
@@ -152,14 +152,14 @@ public class ExperimentObject2 : ExperimentObject
             case "rude push left nose wing":
                 if (attention.hoveredWindow as VideoPlayerWindow)
                 {
-                    (attention.hoveredWindow as VideoPlayerWindow).Last();
-                    if (taskId == 4)
+                    (attention.hoveredWindow as VideoPlayerWindow).Next();
+                    if (taskId == 5)
                     {
                         manager.FinishTask();
                     }
-                    else if (taskId == 2)
+                    else if (taskId == 3)
                     {
-                        var rand = Random.Range(0, 4);
+                        var rand = Random.Range(0, 2);
                         if (rand > 0)
                         {
                             manager.FinishTask();
@@ -183,7 +183,7 @@ public class ExperimentObject2 : ExperimentObject
                 break;
 
             case "none":
-                var rand2 = Random.Range(0, 4);
+                var rand2 = Random.Range(0, 2);
                 if (rand2 > 0)
                 {
                     manager.FinishTask();

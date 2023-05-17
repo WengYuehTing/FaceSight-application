@@ -56,6 +56,8 @@ public class ExperimentManager : MonoBehaviour
     private Queue<string> actions;
     private AudioSource beep;
 
+    private bool isSetupWorldOrigin = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -334,6 +336,14 @@ public class ExperimentManager : MonoBehaviour
                 break;
 
             case "h":
+                if (!isSetupWorldOrigin)
+                {
+                    GameObject origin = GameObject.Find("WorldOrigin");
+                    origin.transform.position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition();
+                    //origin.transform.position.z = 20.0f;
+                    isSetupWorldOrigin = true;
+                }
+
                 Window prefab = Find("Home");
                 if (prefab != null)
                 {
@@ -356,6 +366,7 @@ public class ExperimentManager : MonoBehaviour
                     break;
                 }
                 state = TaskState.Show;
+
                 if (remainTasks.Count > 0)
                 {
                     int application = remainTasks[0];
@@ -441,6 +452,14 @@ public class ExperimentManager : MonoBehaviour
             }
 
             Destroy(obj.gameObject);
+        }
+
+        if (!isSetupWorldOrigin)
+        {
+            GameObject origin = GameObject.Find("WorldOrigin");
+            origin.transform.position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition();
+            //origin.transform.position.z = 20.0f;
+            isSetupWorldOrigin = true;
         }
 
         isStartExperiment = true;

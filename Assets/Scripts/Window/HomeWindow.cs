@@ -14,7 +14,7 @@ public class HomeWindow : Window
         eulerAngleOffsets = new Vector3(0.0f, 0.0f, 0.0f);
         visibility = true;
 #if UNITY_EDITOR
-        positionOffsets = new Vector3(0.0f, 4.0f, 0.0f); // 
+        positionOffsets = new Vector3(0.0f, 0.0f, 0.0f); // 
 #endif
     }
     protected override void Start()

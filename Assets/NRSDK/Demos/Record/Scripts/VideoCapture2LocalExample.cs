@@ -66,7 +66,7 @@ namespace NRKernal.NRExamples
 
                 m_VideoCapture.StartVideoModeAsync(cameraParameters, OnStartedVideoCaptureMode);
 
-                Previewer.SetData(m_VideoCapture.PreviewTexture, true);
+                //Previewer.SetData(m_VideoCapture.PreviewTexture, true);
             }
         }
 
@@ -78,7 +78,7 @@ namespace NRKernal.NRExamples
             }
             Debug.Log("Stop Video Capture!");
             m_VideoCapture.StopRecordingAsync(OnStoppedRecordingVideo);
-            Previewer.SetData(m_VideoCapture.PreviewTexture, false);
+            //Previewer.SetData(m_VideoCapture.PreviewTexture, false);
         }
 
         void OnStartedVideoCaptureMode(NRVideoCapture.VideoCaptureResult result)

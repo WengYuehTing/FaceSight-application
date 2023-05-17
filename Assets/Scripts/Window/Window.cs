@@ -98,6 +98,8 @@ public class Window : MonoBehaviour, WindowBase
         
         visibility = true;
         eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, 0) + eulerAngleOffsets;
+        
+        //position = GameObject.Find("WorldOrigin").transform.position + positionOffsets;
         position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition() + positionOffsets;
         //eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
         transform.LookAt(Camera.main.transform);

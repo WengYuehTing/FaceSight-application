@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NRKernal.NRExamples;
 
 public class ApplicationManager : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class ApplicationManager : MonoBehaviour
     public AudioSource beep;
 
     public int continueMode = 0;
+
+    private bool isSetupWorldOrigin = false;
+
+    public VideoCapture2LocalExample videoRecorder;
+    public bool isStartRecoding = false;
 
     void Start()
     {
@@ -96,6 +102,8 @@ public class ApplicationManager : MonoBehaviour
                     {
                         ContactsWindow cw = GameObject.Instantiate(contact) as ContactsWindow;
                         cw.Open();
+                        if (userSpeech == "error")
+                            userSpeech = "梁老板";
                         cw.Make(userSpeech);
                     }
                 }
@@ -120,13 +128,13 @@ public class ApplicationManager : MonoBehaviour
 
             case "gentle push left nose wing":
                 if(hoverWindow as VideoPlayerWindow) {
-                    (hoverWindow as VideoPlayerWindow).ShortBackward();
+                    (hoverWindow as VideoPlayerWindow).ShortForward();
                 }
                 break;
             
             case "gentle push right nose wing":
                 if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortForward();
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).ShortBackward();
                 }
                 break;
             
@@ -138,13 +146,13 @@ public class ApplicationManager : MonoBehaviour
 
             case "rude push right nose wing":
                 if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Next();
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Last();
                 }
                 break;
 
             case "rude push left nose wing":
                 if(Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow) {
-                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Last();
+                    (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Next();
                 }
                 break;
 
@@ -154,12 +162,26 @@ public class ApplicationManager : MonoBehaviour
                 }
                 break;
 
-            case "s":
+            case "o":
                 experiment.StartExperiment();
                 this.gameObject.SetActive(false);
                 break;
 
+            case "r":
+                if (!isStartRecoding)
+                {
+                    videoRecorder.StartVideoCapture();
+                    isStartRecoding = true;
+                } else
+                {
+                    videoRecorder.StopVideoCapture();
+                    isStartRecoding = false;
+                }
+                
+                break;
+
             case "none":
+                /*
                 if (hoverWindow as VideoPlayerWindow)
                 {
                     (Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as VideoPlayerWindow).Mute();
@@ -169,9 +191,18 @@ public class ApplicationManager : MonoBehaviour
                 {
                     Tapping();
                 }
+                */
                 break;
 
+            case "z":
             case "phone":
+                if (!isSetupWorldOrigin)
+                {
+                    GameObject origin = GameObject.Find("WorldOrigin");
+                    origin.transform.position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition();
+                    //origin.transform.position.z = 20.0f;
+                    isSetupWorldOrigin = true;
+                }
                 if (!hoverWindow)
                 {
                     Window pc = Find("PreContact");
@@ -189,7 +220,7 @@ public class ApplicationManager : MonoBehaviour
                     }
                     else
                     {
-                        beep.Play();
+                        //beep.Play();
                     }
                 } else
                 {
@@ -215,8 +246,16 @@ public class ApplicationManager : MonoBehaviour
                 break;
                 */
 
-            case "v":
+            case "x":
             case "cover mouth":
+                if (!isSetupWorldOrigin)
+                {
+                    GameObject origin = GameObject.Find("WorldOrigin");
+                    origin.transform.position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition();
+                    //origin.transform.position.z = 20.0f;
+                    isSetupWorldOrigin = true;
+                }
+
                 if (!hoverWindow)
                 {
                     Window voicePrefab = Find("VoiceAssistant");
@@ -257,7 +296,7 @@ public class ApplicationManager : MonoBehaviour
                 isTappingWindow = false;
                 break;
 
-            case "i":
+            case "a":
             case "open_videoplayer":
                 Window vpp = Find("VideoPlayer");
                 if (vpp != null)
@@ -267,7 +306,7 @@ public class ApplicationManager : MonoBehaviour
                 }
                 break;
 
-            case "p":
+            case "s":
             case "open_photolibrary":
                 Window plp = Find("PhotoLibraryExperiment");
                 if (plp != null)
@@ -279,6 +318,14 @@ public class ApplicationManager : MonoBehaviour
 
             case "h":
             case "grip":
+                if (!isSetupWorldOrigin)
+                {
+                    GameObject origin = GameObject.Find("WorldOrigin");
+                    origin.transform.position = Camera.main.transform.parent.GetComponent<Attention>().GetSlotPosition();
+                    //origin.transform.position.z = 20.0f;
+                    isSetupWorldOrigin = true;
+                }
+                /*
                 if (!hoverWindow)
                 {
                     Window prefab = Find("Home");
@@ -299,13 +346,32 @@ public class ApplicationManager : MonoBehaviour
                 {
                     Tapping();
                 }
+                */
+                Window prefab = Find("Home");
+                if (prefab != null)
+                {
+                    if (GameObject.FindObjectOfType<HomeWindow>() != null)
+                    {
+                        Window window = GameObject.FindObjectOfType<Window>();
+                        window.Close();
+                    }
+                    else
+                    {
+                        if (!hoverWindow)
+                        {
+                            Window window = GameObject.Instantiate(prefab) as Window;
+                            window.Open();
+                        }
+                    }
+                }
                 
+
                 break;
 
             case "two hands":
                 if (hoverWindow as PhotoLibraryExperimentWindow)
                 {
-                    beep.Play();
+                    //beep.Play();
                 }
                 break;
 
@@ -325,7 +391,7 @@ public class ApplicationManager : MonoBehaviour
                     }
                     else
                     {
-                        beep.Play();
+                        //beep.Play();
                     }
                 } else
                 {
@@ -341,14 +407,22 @@ public class ApplicationManager : MonoBehaviour
                         var decoded = action.Split(';');
                         var numberOfHand = int.Parse(decoded[0]);
                         var value = float.Parse(decoded[1]);
-                        if (Mathf.Abs(value) >= 100)
+                        if (Mathf.Abs(value) >= 50)
                         {
                             break;
                         }
                         
                         PhotoLibraryExperimentWindow plw = Camera.main.transform.parent.GetComponent<Attention>().hoveredWindow as PhotoLibraryExperimentWindow;
 
-                        swipeSequence.Add(value / 133.0F);
+                        if (numberOfHand == 1)
+                        {
+                            swipeSequence.Add(value / 133.0F);
+                        }
+                        else
+                        {
+                            swipeSequence.Add(value / 90.0f);
+                        }
+                        
                         if (swipeSequence.Count > 2)
                         {
                             swipeSequence.RemoveAt(0);
@@ -362,7 +436,8 @@ public class ApplicationManager : MonoBehaviour
                             }
                             else
                             {
-                                plw.Zoom(value / 90.0f);
+                                plw.Zoom(swipeSequence[0]);
+                                //plw.Zoom(value / 90.0f);
                             }
                         }
                         else if (continueMode == 1)

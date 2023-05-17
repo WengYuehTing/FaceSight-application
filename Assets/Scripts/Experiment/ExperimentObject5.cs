@@ -85,7 +85,6 @@ public class ExperimentObject5 : ExperimentObject
             case "left nose wing":
             case "two hands":
             case "none":
-            case "grip":
             case "phone":
                 source.Play();
                 break;

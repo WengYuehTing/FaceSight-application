@@ -58,7 +58,6 @@ public class VoiceWindow : Window
                 
                 if(index >= users_to_speech.Length) {
                     isStartingGenerating = false;
-                    audioSource.Play();
                     Invoke("OnFinishSaying", AI_make_response_time);
                 }
 
@@ -72,6 +71,7 @@ public class VoiceWindow : Window
     }
 
     private void OnFinishSaying() {
+        audioSource.Play();
         assistent.text = AIResponse;
         foreach (GameObject gameObject in aiContents)
         {
